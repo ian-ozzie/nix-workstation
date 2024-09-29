@@ -3,6 +3,12 @@
   ...
 }:
 {
+  environment.systemPackages = with pkgs; [
+    appimage-run
+    firefox
+    webkitgtk_6_0
+  ];
+
   fonts = {
     enableDefaultPackages = true;
     fontDir.enable = true;
