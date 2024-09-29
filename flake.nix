@@ -6,5 +6,8 @@
   };
 
   outputs = _: {
+    nixosModules = {
+      gnome = import ./nixos/gnome;
+    };
   };
 }
