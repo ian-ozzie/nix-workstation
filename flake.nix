@@ -8,6 +8,7 @@
   outputs = _: {
     nixosModules = {
       gnome = import ./nixos/gnome;
+      hyprland = import ./nixos/hyprland;
     };
   };
 }
