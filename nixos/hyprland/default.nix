@@ -16,15 +16,11 @@
   ];
 
   ozzie.workstation = {
+    hyprland.enable = true;
+
     greetd = {
       enable = lib.mkDefault true;
       command = lib.mkDefault "Hyprland";
     };
-  };
-
-  programs.hyprland = {
-    enable = true;
-    package = with pkgs; hyprland;
-    portalPackage = with pkgs; xdg-desktop-portal-hyprland;
   };
 }

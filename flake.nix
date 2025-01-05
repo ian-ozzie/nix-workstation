@@ -15,5 +15,9 @@
       gnome = import ./nixos/gnome;
       hyprland = import ./nixos/hyprland;
     };
+
+    homeModules = {
+      hyprland = import ./home/hyprland;
+    };
   };
 }
