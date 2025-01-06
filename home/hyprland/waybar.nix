@@ -4,10 +4,19 @@
   ...
 }:
 let
+  inherit (config.ozzie.workstation.theme.colours)
+    accent
+    alert
+    highlight
+    lowlight
+    ;
+
   cfg = config.ozzie.workstation.waybar;
 in
 {
   config = lib.mkIf cfg.enable {
+    stylix.targets.waybar.enable = false;
+
     programs.waybar = {
       settings = [
         {
@@ -139,10 +148,10 @@ in
       ];
 
       style = ''
-        @define-color accent #cba6f7;
-        @define-color alert #d20f39;
-        @define-color highlight #791aea;
-        @define-color lowlight #1e1e2e;
+        @define-color accent ${accent};
+        @define-color alert ${alert};
+        @define-color highlight ${highlight};
+        @define-color lowlight ${lowlight};
 
         * {
           border-radius: 0px;
