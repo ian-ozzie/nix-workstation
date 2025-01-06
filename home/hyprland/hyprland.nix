@@ -1,8 +1,18 @@
 {
+  config,
+  lib,
   pkgs,
   ...
 }:
+let
+  inherit (config.ozzie.workstation.theme) colours;
+
+  highlight = lib.strings.removePrefix "#" colours.highlight;
+  lowlight = lib.strings.removePrefix "#" colours.lowlight;
+in
 {
+  stylix.targets.hyprland.enable = false;
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = with pkgs; hyprland;
@@ -70,8 +80,8 @@
           border_size = 1
 
           # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-          col.active_border = rgba(8839efff)
-          col.inactive_border = rgba(cba6f7ff)
+          col.active_border = rgba(${highlight}ff)
+          col.inactive_border = rgba(${lowlight}ff)
 
           # Set to true enable resizing windows by clicking and dragging on borders and gaps
           resize_on_border = false
@@ -95,7 +105,7 @@
               enabled = true
               range = 4
               render_power = 3
-              color = rgba(8839efee)
+              color = rgba(${lowlight}ff)
           }
 
           # https://wiki.hyprland.org/Configuring/Variables/#blur

@@ -1,11 +1,15 @@
 {
+  config,
   lib,
   pkgs,
   ...
 }:
+let
+  inherit (config.ozzie.workstation) theme;
+in
 {
   imports = [
-    ../.
+    ./stylix.nix
   ];
 
   environment.systemPackages = with pkgs; [
