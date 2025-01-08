@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   ...
 }:
 {
@@ -8,6 +9,10 @@
     ./hyprland.nix
     ./hyprlock.nix
     ./waybar.nix
+  ];
+
+  home.packages = with pkgs; [
+    hyprpaper
   ];
 
   ozzie.workstation = {
