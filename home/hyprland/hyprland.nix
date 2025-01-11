@@ -49,10 +49,10 @@ in
 
       exec-once = brightnessctl set 0
       exec-once = [workspace 1] $terminal
-      exec-once = [workspace 10 silent] $browser
+      exec-once = [workspace 8 silent] $browser
       exec-once = hyprpaper
       exec-once = hyprpolkitagent
-      exec-once = $bar
+      exec-once = waybar
       exec-once = /home/ozzie/src/scripts/hyprland_handle_events.sh
 
       #############################
@@ -90,7 +90,6 @@ in
           allow_tearing = false
 
           layout = dwindle
-          no_border_on_floating = false
       }
 
       # https://wiki.hyprland.org/Configuring/Variables/#decoration
@@ -195,9 +194,8 @@ in
       bind = $mainMod, W, exec, $browser
       bind = $mainMod, R, exec, $menu
       bind = $mainMod, C, killactive,
-      bind = $mainMod SHIFT, C, exec, kill -9 $(hyprctl activewindow | grep pid | tail -1 | awk '{print$2}')
       bind = $mainMod, M, exit,
-      bind = $mainMod SHIFT, B, exec, pkill $bar || $bar
+      bind = $mainMod SHIFT, B, exec, pkill waybar || waybar
 
       bind = $mainMod, F, togglefloating,
       bind = $mainMod, P, pseudo, # dwindle
