@@ -20,17 +20,22 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      greetd.tuigreet
-    ];
-
     services.greetd = {
       enable = true;
       vt = 2;
 
       settings.default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --theme 'border=${accent};text=${accent};prompt=${accent};time=${accent};action=${accent};button=${accent};container=black;input=${accent}' --time --cmd ${cfg.command}";
         user = "greeter";
+
+        command = builtins.concatStringsSep " " [
+          "${lib.getExe pkgs.greetd.tuigreet}"
+          "--remember"
+          "--remember-session"
+          "--time"
+          "--theme 'border=${accent};text=${accent};prompt=${accent};time=${accent};action=${accent};button=${accent};container=black;input=${accent}'"
+          "--sessions ${config.services.displayManager.sessionData.desktops}/share/wayland-sessions"
+          "--cmd ${cfg.command}"
+        ];
       };
     };
   };
