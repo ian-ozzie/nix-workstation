@@ -61,6 +61,9 @@ in
 
         map ctrl+t new_tab
         map ctrl+shift+t set_tab_title
+
+        map ctrl+l clear_terminal clear active
+        map ctrl+shift+l clear_terminal scrollback active
       '';
     };
   };
