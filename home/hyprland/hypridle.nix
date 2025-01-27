@@ -22,12 +22,12 @@
         }
         {
           on-timeout = "hyprlock";
-          timeout = 900;
+          timeout = 300;
         }
         {
           on-resume = "hyprctl dispatch dpms on";
           on-timeout = "hyprctl dispatch dpms off";
-          timeout = 1200;
+          timeout = 600;
         }
       ];
     };
