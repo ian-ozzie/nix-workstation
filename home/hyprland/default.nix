@@ -8,6 +8,7 @@
     ./hypridle.nix
     ./hyprland.nix
     ./hyprlock.nix
+    ./tofi.nix
     ./waybar.nix
   ];
 
@@ -23,6 +24,7 @@
   ];
 
   ozzie.workstation = {
+    tofi.enable = lib.mkDefault true;
     waybar.enable = lib.mkDefault true;
   };
 }
