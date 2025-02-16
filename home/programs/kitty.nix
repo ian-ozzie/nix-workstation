@@ -64,6 +64,8 @@ in
 
         map ctrl+l clear_terminal clear active
         map ctrl+shift+l clear_terminal scrollback active
+
+        scrollback_pager less --chop-long-lines --RAW-CONTROL-CHARS +INPUT_LINE_NUMBER -r
       '';
     };
   };
