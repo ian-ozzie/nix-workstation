@@ -202,8 +202,8 @@ in
       bind = $mainMod, J, togglesplit, # dwindle
 
       # Screenshots
-      bind = $mainMod, s, exec, hyprshot -m region
-      bind = $mainMod SHIFT, s, exec, hyprshot -m window
+      bind = ALT SHIFT, 4, exec, hyprshot -m region
+      bind = ALT SHIFT, 3, exec, hyprshot -m window
 
       # Move focus with mainMod + arrow keys
       bind = $mainMod, left, movefocus, l
