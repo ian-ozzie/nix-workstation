@@ -57,9 +57,9 @@ in
 
       extraConfig = ''
         map ctrl+t new_tab
-        map ctrl+shift+t set_tab_title
+        map kitty_mod+t set_tab_title
 
-        map ctrl+l clear_terminal reset active
+        map kitty_mod+l clear_terminal reset active
 
         map kitty_mod+j scroll_page_down
         map kitty_mod+k scroll_page_up
@@ -67,8 +67,10 @@ in
         map kitty_mod+g show_last_command_output
 
         map alt+` move_window_to_top
-        map kitty_mod+/ layout_action rotate
-        map kitty_mod+l next_layout
+        map alt+[ prev_window
+        map alt+] next_window
+        map kitty_mod+' layout_action rotate
+        map kitty_mod+; next_layout
 
         map ctrl+left neighboring_window left
         map ctrl+right neighboring_window right
