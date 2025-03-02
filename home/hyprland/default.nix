@@ -13,14 +13,12 @@
   ];
 
   home.packages = with pkgs; [
-    catppuccin-cursors.mochaMauve
     hyprcursor
     hyprpaper
     hyprpicker
     hyprpolkitagent
     hyprshot
     hyprsunset
-    tofi
   ];
 
   ozzie.workstation = {
