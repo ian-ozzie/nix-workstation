@@ -24,12 +24,13 @@ in
           position = "top";
 
           modules-left = [
+            "custom/logout"
+            "idle_inhibitor"
             "hyprland/workspaces"
             "hyprland/window"
           ];
 
           modules-right = [
-            "idle_inhibitor"
             "pulseaudio"
             "network"
             "memory"
@@ -82,6 +83,12 @@ in
             };
           };
 
+          "custom/logout" = {
+            format = "󰗽";
+            on-click = "sleep 0.1 && wlogout";
+            tooltip = false;
+          };
+
           idle_inhibitor = {
             format = "{icon}";
 
@@ -123,6 +130,7 @@ in
 
             format-icons = {
               headphone = " ";
+
               default = [
                 " "
                 " "
@@ -156,6 +164,7 @@ in
         * {
           border-radius: 0px;
           border: none;
+          font-family: "DejaVuSansM Nerd Font";
           font-size: 16px;
         }
 
@@ -183,11 +192,15 @@ in
           border-left: 0;
         }
 
+        window .modules-left #workspaces {
+          padding: 0;
+        }
+
         window .modules-left #workspaces button {
           border: 0;
           color: @accent;
           font-weight: 400;
-          padding: 4px 8px;
+          padding: 2px 8px;
           transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
         }
 
