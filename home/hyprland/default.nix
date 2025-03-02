@@ -19,6 +19,8 @@
     hyprpolkitagent
     hyprshot
     hyprsunset
+    playerctl
+    swappy
   ];
 
   ozzie.workstation = {
