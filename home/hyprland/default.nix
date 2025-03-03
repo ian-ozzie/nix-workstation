@@ -8,6 +8,7 @@
     ./hypridle.nix
     ./hyprland.nix
     ./hyprlock.nix
+    ./hyprpaper.nix
     ./tofi.nix
     ./waybar.nix
     ./wlogout.nix
@@ -15,7 +16,6 @@
 
   home.packages = with pkgs; [
     hyprcursor
-    hyprpaper
     hyprpicker
     hyprpolkitagent
     hyprshot
