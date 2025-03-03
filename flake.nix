@@ -20,6 +20,8 @@
   };
 
   outputs = _: {
+    lib = import ./lib;
+
     nixosModules = {
       default = import ./nixos;
 
