@@ -10,6 +10,7 @@
     ./hyprlock.nix
     ./tofi.nix
     ./waybar.nix
+    ./wlogout.nix
   ];
 
   home.packages = with pkgs; [

@@ -85,7 +85,7 @@ in
 
           "custom/logout" = {
             format = "󰗽";
-            on-click = "sleep 0.1 && wlogout";
+            on-click = "wlogout -b 4";
             tooltip = false;
           };
 
