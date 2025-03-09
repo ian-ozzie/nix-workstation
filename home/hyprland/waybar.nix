@@ -31,6 +31,7 @@ in
           ];
 
           modules-right = [
+            "tray"
             "pulseaudio"
             "network"
             "memory"
@@ -87,6 +88,11 @@ in
             format = "󰗽";
             on-click = "wlogout -b 4";
             tooltip = false;
+          };
+
+          "hyprland/window" = {
+            icon = true;
+            icon-size = 16;
           };
 
           idle_inhibitor = {
@@ -152,6 +158,12 @@ in
               ""
             ];
           };
+
+          tray = {
+            icon-size = 16;
+            reverse-direction = true;
+            spacing = 10;
+          };
         }
       ];
 
@@ -192,6 +204,10 @@ in
           border-left: 0;
         }
 
+        #idle-inhibitor {
+          font-size: 12px;
+        }
+
         window .modules-left #workspaces {
           padding: 0;
         }
@@ -221,6 +237,10 @@ in
 
         window .modules-left #workspaces button.urgent {
           background-color: @alert;
+        }
+
+        #tray * * {
+          color: @accent;
         }
       '';
     };
