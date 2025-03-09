@@ -54,9 +54,10 @@ in
         "$mainMod, E, exec, $explorer"
         "$mainMod, R, exec, $menu"
         "$mainMod SHIFT, B, exec, pkill $bar || $bar"
+        "$mainMod, L, exec, hyprlock --immediate"
 
         "ALT, F4, killactive,"
-        "ALT SHIFT, F4, exec, kill -9 $(hyprctl activewindow | grep pid | tail -1 | awk '{print$2}')"
+        "ALT SHIFT, F4, forcekillactive"
         "CTRL ALT SHIFT, F4, exit,"
 
         "$mainMod, F, togglefloating,"
@@ -88,7 +89,7 @@ in
         "$mainMod, 9, workspace, 9"
         "$mainMod, 0, workspace, 10"
 
-        # Move active window to a workspace with mainMod + SHIFT + [0-9]
+        # Move active window
         "$mainMod SHIFT, 1, movetoworkspace, 1"
         "$mainMod SHIFT, 2, movetoworkspace, 2"
         "$mainMod SHIFT, 3, movetoworkspace, 3"
