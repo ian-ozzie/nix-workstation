@@ -63,6 +63,8 @@ in
         "$mainMod, F, togglefloating,"
         "$mainMod, P, pseudo,"
         "$mainMod, J, togglesplit,"
+        "$mainMod, code:34, cyclenext,"
+        "$mainMod, code:35, cyclenext, prev"
 
         # Screenshots
         "ALT SHIFT, 1, exec, hyprpicker -a -f hex"
