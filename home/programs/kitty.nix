@@ -56,6 +56,8 @@ in
       };
 
       extraConfig = ''
+        clear_all_shortcuts yes
+
         map ctrl+t new_tab
         map kitty_mod+t set_tab_title
 
