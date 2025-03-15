@@ -16,11 +16,6 @@
 
       listener = [
         {
-          on-resume = "brightnessctl -d framework_laptop::kbd_backlight s 100";
-          on-timeout = "brightnessctl -d framework_laptop::kbd_backlight s 0";
-          timeout = 60;
-        }
-        {
           on-timeout = "hyprlock";
           timeout = 300;
         }
