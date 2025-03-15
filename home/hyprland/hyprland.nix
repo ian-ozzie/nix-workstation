@@ -169,12 +169,8 @@ in
       exec-once = [
         "dbus-update-activation-environment --all --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "brightnessctl set 0"
-        "[workspace 1] $terminal"
-        "[workspace 10 silent] $browser"
         "hyprpolkitagent"
         "$bar"
-        "/home/ozzie/src/scripts/hyprland_handle_events.sh"
       ];
 
       general = {
