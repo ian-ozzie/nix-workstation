@@ -1,12 +1,7 @@
 {
-  config,
   lib,
-  pkgs,
   ...
 }:
-let
-  inherit (config.ozzie.workstation) theme;
-in
 {
   imports = [
     ./stylix.nix
