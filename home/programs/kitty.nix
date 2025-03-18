@@ -59,20 +59,24 @@ in
         clear_all_shortcuts yes
 
         map ctrl+t new_tab
-        map kitty_mod+t set_tab_title
+        map ctrl+tab next_tab
+        map ctrl+shift+tab previous_tab
+        map ctrl+shift+t set_tab_title
 
-        map kitty_mod+l clear_terminal reset active
+        map ctrl+shift+l clear_terminal reset active
 
-        map kitty_mod+j scroll_page_down
-        map kitty_mod+k scroll_page_up
-        map kitty_mod+h show_scrollback
-        map kitty_mod+g show_last_command_output
+        map ctrl+shift+j scroll_page_down
+        map ctrl+shift+k scroll_page_up
+        map ctrl+shift+h show_scrollback
+        map ctrl+shift+g show_last_command_output
+
+        map ctrl+shift+v paste_from_clipboard
 
         map alt+` move_window_to_top
         map alt+[ prev_window
         map alt+] next_window
-        map kitty_mod+' layout_action rotate
-        map kitty_mod+; next_layout
+        map ctrl+shift+' layout_action rotate
+        map ctrl+shift+; next_layout
 
         map ctrl+left neighboring_window left
         map ctrl+right neighboring_window right
@@ -82,10 +86,10 @@ in
         map shift+left move_window left
         map shift+right move_window right
         map shift+down move_window down
-        map kitty_mod+up launch --location=hsplit
-        map kitty_mod+down launch --location=hsplit
-        map kitty_mod+left launch --location=vsplit
-        map kitty_mod+right launch --location=vsplit
+        map ctrl+shift+up launch --location=hsplit
+        map ctrl+shift+down launch --location=hsplit
+        map ctrl+shift+left launch --location=vsplit
+        map ctrl+shift+right launch --location=vsplit
 
         # Colours here to come after theme include
         active_border_color ${highlight}
