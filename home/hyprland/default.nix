@@ -4,6 +4,10 @@
   ...
 }:
 {
+  gtk.enable = true;
+  qt.enable = true;
+  xdg.enable = true;
+
   imports = [
     ./hypridle.nix
     ./hyprland.nix

@@ -5,6 +5,7 @@
 {
   imports = [
     ./stylix.nix
+    ./xdg.nix
   ];
 
   ozzie.workstation = {
