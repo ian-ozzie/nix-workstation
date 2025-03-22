@@ -13,6 +13,7 @@
     ./hyprland.nix
     ./hyprlock.nix
     ./hyprpaper.nix
+    ./swaync.nix
     ./tofi.nix
     ./waybar.nix
     ./wlogout.nix
