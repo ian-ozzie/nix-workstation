@@ -42,11 +42,11 @@ in
           ];
 
           battery = {
-            format = "{icon}   {capacity}%";
-            format-alt = "{icon}   {power}W";
+            format = "{icon}  {capacity}%";
+            format-alt = "{icon}  {power}W";
             format-charging = " {capacity}%";
             format-charging-full = " {capacity}%";
-            format-full = "{icon}   {capacity}%";
+            format-full = "{icon}  {capacity}%";
             format-time = "{H}:{M:02}";
             interval = 60;
             tooltip = true;
@@ -93,6 +93,45 @@ in
           "hyprland/window" = {
             icon = true;
             icon-size = 16;
+            separate-outputs = true;
+          };
+
+          "hyprland/workspaces" = {
+            disable-scroll = true;
+            format = "{name} {windows}";
+            format-window-separator = "";
+            show-special = true;
+            special-visible-only = true;
+            window-rewrite-default = " ";
+            window-rewrite = {
+              "Bitwarden" = " ";
+              "brave-browser" = " ";
+              "firefox" = " ";
+              "kitty" = " ";
+              "librewolf" = " ";
+              "obsidian" = " ";
+
+              "1Password" = "󰢁 ";
+              "Slack" = " ";
+              "google-chrome" = " ";
+
+              "Gimp-2.10" = " ";
+              "Gimp-3.0" = " ";
+              "QIDISlicer" = "󰹜 ";
+              "openscad" = "󰻫 ";
+              "org.inkscape.Inkscape" = " ";
+
+              "Supersonic" = " ";
+              "org.strawberrymusicplayer.strawberry" = "󰁧 ";
+
+              "LosslessCut" = "󱦩 ";
+              "com.obsproject.Studio" = "󱜠 ";
+              "vlc" = "󰕼 ";
+
+              "discord" = " ";
+              "net.lutris.Lutris" = " ";
+              "steam" = " ";
+            };
           };
 
           idle_inhibitor = {
@@ -118,8 +157,8 @@ in
 
           network = {
             format-disconnected = "No connection";
-            format-ethernet = "  {ifname}";
-            format-wifi = "   {signalStrength}%";
+            format-ethernet = " ";
+            format-wifi = "  {signalStrength}%";
             interval = 10;
             tooltip = true;
             tooltip-format-ethernet = "{icon} {ifname} @ {ipaddr}/{cidr} via {gwaddr}";
@@ -214,10 +253,15 @@ in
 
         window .modules-left #workspaces button {
           border: 0;
+          border-left: 1px solid @accent;
           color: @accent;
           font-weight: 400;
-          padding: 2px 8px;
+          padding: 2px 0 0 8px;
           transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+
+        window .modules-left #workspaces button:first-child {
+          border-left: 0;
         }
 
         window .modules-left #workspaces button:hover {
