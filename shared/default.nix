@@ -1,8 +1,5 @@
 {
   imports = [
-    ../shared
-    ../workstation
-
     ./programs
   ];
 }
