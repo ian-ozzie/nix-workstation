@@ -13,6 +13,11 @@ in
 {
   stylix.targets.hyprland.enable = false;
 
+  home.file.".bin/hyprland-adjust-zoom.sh" = {
+    executable = true;
+    text = builtins.readFile ./scripts/hyprland-adjust-zoom.sh;
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = with pkgs; hyprland;
