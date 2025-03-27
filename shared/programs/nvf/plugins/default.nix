@@ -11,6 +11,7 @@ in
     ./bigfile.nix
     ./git.nix
     ./indentline.nix
+    ./lastplace.nix
     ./motion.nix
     ./rainbow-delimiters.nix
     ./statusline.nix
