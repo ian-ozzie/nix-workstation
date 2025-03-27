@@ -31,8 +31,8 @@ in
 
           modules-left = [
             "custom/logout"
-            "idle_inhibitor"
             "hyprland/workspaces"
+            "idle_inhibitor"
             "custom/yubikey"
             "hyprland/window"
           ];
@@ -80,8 +80,8 @@ in
           };
 
           cpu = {
-            format = "  {usage}%";
-            format-alt = "  {load}";
+            format = " {usage}%";
+            format-alt = " {load}";
             interval = 5;
             tooltip = true;
 
@@ -103,12 +103,15 @@ in
           };
 
           "hyprland/window" = {
+            expand = true;
+            format = "{title}";
             icon = true;
             icon-size = 16;
             separate-outputs = true;
           };
 
           "hyprland/workspaces" = {
+            cursor = true;
             disable-scroll = true;
             format = "{name} {windows}";
             format-window-separator = "";
@@ -211,6 +214,7 @@ in
           };
 
           tray = {
+            expand = false;
             icon-size = 16;
             reverse-direction = true;
             spacing = 10;
@@ -224,7 +228,7 @@ in
         @define-color highlight ${highlight};
         @define-color lowlight ${lowlight};
 
-        @keyframes pulse-alert { 30% { background-color: @alert; }}
+        @keyframes pulse-alert { 10% { background-color: @alert; }}
 
         * {
           border-radius: 0px;
@@ -237,6 +241,10 @@ in
           background: @lowlight;
           border-bottom: 2px solid @accent;
           color: @accent;
+        }
+
+        window .module {
+          border-bottom: 2px solid @accent;
         }
 
         .modules-left .module {
@@ -253,24 +261,29 @@ in
           padding: 0 8px;
         }
 
-        .modules-right >:first-child .module {
-          border-left: 0;
-        }
-
-        window .modules-left #idle_inhibitor {
-          font-size: 14px;
-        }
-
         window .modules-left #workspaces {
           padding: 0;
         }
 
+        window .modules-left #custom-logout {
+          background-color: @lowlight;
+          border-bottom: 2px solid @accent;
+          transition: background 0.2s ease-in-out;
+        }
+
+        window .modules-left #custom-logout:hover {
+          background-color: @highlight;
+          border-bottom: 2px solid @accent;
+        }
+
         window .modules-left #workspaces button {
-          border: 0;
+          border-bottom: 0;
           border-left: 1px solid @accent;
+          border-right: 0;
+          border-top: 0;
           color: @accent;
           font-weight: 400;
-          padding: 2px 0 0 8px;
+          padding: 0 0 0 8px;
           transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
         }
 
@@ -296,7 +309,7 @@ in
         window .modules-left #workspaces button.urgent {
           background-color: @lowlight;
           color: @accent;
-          animation: pulse-alert 10s infinite;
+          animation: pulse-alert 5s infinite;
         }
 
         window .modules-left #idle_inhibitor {
@@ -317,7 +330,7 @@ in
         }
 
         window .modules-left #custom-yubikey.alert {
-          animation: pulse-alert 10s infinite;
+          animation: pulse-alert 5s infinite;
         }
       '';
     };
