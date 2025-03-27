@@ -12,6 +12,7 @@ in
     ./git.nix
     ./indentline.nix
     ./motion.nix
+    ./rainbow-delimiters.nix
     ./statusline.nix
     ./surround.nix
     ./tabstop.nix
