@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -17,6 +18,11 @@ in
   config = lib.mkIf cfg.enable {
     stylix.targets.waybar.enable = false;
 
+    home.file.".config/waybar/yubikey-waiting.sh" = {
+      executable = true;
+      text = builtins.readFile ./scripts/waybar-yubikey-waiting.sh;
+    };
+
     programs.waybar = {
       settings = [
         {
@@ -27,6 +33,7 @@ in
             "custom/logout"
             "idle_inhibitor"
             "hyprland/workspaces"
+            "custom/yubikey"
             "hyprland/window"
           ];
 
@@ -88,6 +95,11 @@ in
             format = "󰗽";
             on-click = "wlogout -b 4";
             tooltip = false;
+          };
+
+          "custom/yubikey" = {
+            exec = "$XDG_CONFIG_HOME/waybar/yubikey-waiting.sh";
+            return-type = "json";
           };
 
           "hyprland/window" = {
@@ -212,6 +224,8 @@ in
         @define-color highlight ${highlight};
         @define-color lowlight ${lowlight};
 
+        @keyframes pulse-alert { 30% { background-color: @alert; }}
+
         * {
           border-radius: 0px;
           border: none;
@@ -243,8 +257,8 @@ in
           border-left: 0;
         }
 
-        #idle-inhibitor {
-          font-size: 12px;
+        window .modules-left #idle_inhibitor {
+          font-size: 14px;
         }
 
         window .modules-left #workspaces {
@@ -280,13 +294,50 @@ in
         }
 
         window .modules-left #workspaces button.urgent {
-          background-color: @alert;
+          background-color: @lowlight;
+          color: @accent;
+          animation: pulse-alert 10s infinite;
         }
 
-        #tray * * {
+        window .modules-left #idle_inhibitor {
+          background-color: @lowlight;
+          border-bottom: 2px solid @accent;
+          font-size: 14px;
+          transition: background 0.2s ease-in-out;
+        }
+
+        window .modules-left #idle_inhibitor:hover {
+          background-color: @highlight;
+        }
+
+        window .modules-left #custom-yubikey {
+          background-color: @lowlight;
+          border-bottom: 2px solid @accent;
           color: @accent;
         }
+
+        window .modules-left #custom-yubikey.alert {
+          animation: pulse-alert 10s infinite;
+        }
       '';
+    };
+
+    systemd.user = {
+      services.yubikey-touch-detector = {
+        Service.ExecStart = lib.getExe pkgs.yubikey-touch-detector;
+        Unit.Description = "Yubikey Touch Detector daemon";
+      };
+
+      sockets.yubikey-touch-detector = {
+        Install.WantedBy = [ "sockets.target" ];
+        Unit.Description = "Yubikey Touch Detector daemon";
+
+        Socket = {
+          Accept = false;
+          ListenStream = "%t/yubikey-touch-detector.socket";
+          SocketMode = "0600";
+        };
+      };
     };
   };
 }
