@@ -21,6 +21,10 @@ in
 
   config = lib.mkIf cfg.enable {
     programs.nvf.settings.vim = {
+      binds = {
+        whichKey.enable = true;
+      };
+
       comments = {
         comment-nvim.enable = true;
       };
