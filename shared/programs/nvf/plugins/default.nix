@@ -73,6 +73,10 @@ in
           ];
         };
       };
+
+      utility = {
+        ccc.enable = true;
+      };
     };
   };
 }
