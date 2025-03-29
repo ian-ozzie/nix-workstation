@@ -352,5 +352,10 @@ in
         };
       };
     };
+
+    wayland.windowManager.hyprland.settings = {
+      bind = [ "$mainMod SHIFT, B, exec, pkill waybar || waybar" ];
+      exec-once = [ "waybar" ];
+    };
   };
 }
