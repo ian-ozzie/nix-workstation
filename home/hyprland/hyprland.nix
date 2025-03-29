@@ -58,7 +58,6 @@ in
         "$mainMod, W, exec, $browser"
         "$mainMod, E, exec, $explorer"
         "$mainMod, R, exec, $menu"
-        "$mainMod SHIFT, B, exec, pkill $bar || $bar"
         "$mainMod, L, exec, hyprlock --immediate"
 
         "ALT, F4, killactive,"
@@ -175,11 +174,9 @@ in
         "dbus-update-activation-environment --all --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "hyprpolkitagent"
-        "$bar"
       ];
 
       general = {
-        "$bar" = "waybar";
         "$browser" = "firefox";
         "$explorer" = "kitty -1 yazi";
         "$mainMod" = "SUPER";
