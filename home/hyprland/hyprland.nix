@@ -21,7 +21,6 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
     package = with pkgs; hyprland;
-    systemd.enable = true;
     xwayland.enable = true;
 
     extraConfig = ''
@@ -60,15 +59,17 @@ in
         "$mainMod, R, exec, $menu"
         "$mainMod, L, exec, hyprlock --immediate"
 
-        "ALT, F4, killactive,"
+        "ALT, F4, killactive"
         "ALT SHIFT, F4, forcekillactive"
-        "CTRL ALT SHIFT, F4, exit,"
+        "CTRL ALT SHIFT, F4, exit"
 
-        "$mainMod, F, togglefloating,"
-        "$mainMod, P, pseudo,"
-        "$mainMod, J, togglesplit,"
-        "$mainMod, code:34, cyclenext,"
-        "$mainMod, code:35, cyclenext, prev"
+        "$mainMod, code:49, focusurgentorlast" # code:49 = `
+        "$mainMod, F, togglefloating"
+        "$mainMod SHIFT, F, fullscreen"
+        "$mainMod, P, pseudo"
+        "$mainMod, J, togglesplit"
+        "$mainMod, code:34, cyclenext" # code:34 = [
+        "$mainMod, code:35, cyclenext, prev" # code:35 = ]
 
         # Screenshots
         "ALT SHIFT, 1, exec, hyprpicker -a -f hex"
@@ -83,48 +84,43 @@ in
         "$mainMod, up, movefocus, u"
         "$mainMod, down, movefocus, d"
 
-        # Switch workspaces with mainMod + [0-9]
-        "$mainMod, 1, workspace, 1"
-        "$mainMod, 2, workspace, 2"
-        "$mainMod, 3, workspace, 3"
-        "$mainMod, 4, workspace, 4"
-        "$mainMod, 5, workspace, 5"
-        "$mainMod, 6, workspace, 6"
-        "$mainMod, 7, workspace, 7"
-        "$mainMod, 8, workspace, 8"
-        "$mainMod, 9, workspace, 9"
-        "$mainMod, 0, workspace, 10"
-
-        # Move active window
-        "$mainMod SHIFT, 1, movetoworkspace, 1"
-        "$mainMod SHIFT, 2, movetoworkspace, 2"
-        "$mainMod SHIFT, 3, movetoworkspace, 3"
-        "$mainMod SHIFT, 4, movetoworkspace, 4"
-        "$mainMod SHIFT, 5, movetoworkspace, 5"
-        "$mainMod SHIFT, 6, movetoworkspace, 6"
-        "$mainMod SHIFT, 7, movetoworkspace, 7"
-        "$mainMod SHIFT, 8, movetoworkspace, 8"
-        "$mainMod SHIFT, 9, movetoworkspace, 9"
-        "$mainMod SHIFT, 0, movetoworkspace, 10"
-
-        # Example special workspace (scratchpad)
+        # Scratchpad workspace
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
-      ];
+        "$mainMod CTRL SHIFT, S, movetoworkspacesilent, special:magic"
+      ]
+      ++ (
+        # 0-9 workspace handling
+        builtins.concatLists (
+          map (
+            x:
+            let
+              key = if x == 10 then "0" else toString x;
+              workspace = toString x;
+            in
+            [
+              "$mainMod, ${key}, workspace, ${workspace}"
+              "$mainMod SHIFT, ${key}, movetoworkspace, ${workspace}"
+              "$mainMod CTRL SHIFT, ${key}, movetoworkspacesilent, ${workspace}"
+            ]
+          ) (lib.lists.range 1 10)
+        )
+      );
 
       bindel = [
-        ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ",XF86MonBrightnessUp, exec, brightnessctl set 10%+"
-        ",XF86MonBrightnessDown, exec, brightnessctl set 10%-"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ", XF86MonBrightnessUp, exec, brightnessctl set 10%+"
+        ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
       ];
 
       bindl = [
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPause, exec, playerctl play-pause"
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
+        ", F8, exec, playerctl play-pause"
       ];
 
       bindm = [
@@ -132,6 +128,19 @@ in
         "$mainMod SHIFT, mouse:272, movewindow"
         "$mainMod, mouse:273, movewindow"
       ];
+
+      binds = {
+        hide_special_on_workspace_change = true;
+        scroll_event_delay = 50;
+        workspace_center_on = 1;
+      };
+
+      cursor = {
+        hide_on_key_press = true;
+        persistent_warps = false;
+        warp_on_change_workspace = 1;
+        warp_on_toggle_special = 1;
+      };
 
       decoration = {
         active_opacity = 1.0;
@@ -155,14 +164,20 @@ in
         pseudotile = true;
       };
 
+      ecosystem = {
+        no_donation_nag = true;
+      };
+
       env = [
         "CLUTTER_BACKEND, wayland"
-        "GDK_BACKEND, wayland, x11"
+        "GDK_BACKEND, wayland,x11,*"
+        "GDK_SCALE, 1"
         "MOZ_ENABLE_WAYLAND, 1"
         "NIXOS_OZONE_WL, 1"
         "NIXPKGS_ALLOW_UNFREE, 1"
         "QT_AUTO_SCREEN_SCALE_FACTOR, 1"
-        "QT_QPA_PLATFORM=wayland;xcb"
+        "QT_QPA_PLATFORM, wayland;xcb"
+        "QT_SCALE_FACTOR, 1"
         "QT_WAYLAND_DISABLE_WINDOWDECORATION, 1"
         "SDL_VIDEODRIVER, wayland"
         "XDG_CURRENT_DESKTOP, Hyprland"
@@ -173,7 +188,7 @@ in
       exec-once = [
         "dbus-update-activation-environment --all --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "hyprpolkitagent"
+        "systemctl --user start hyprpolkitagent"
       ];
 
       general = {
@@ -227,8 +242,30 @@ in
         "suppressevent maximize, class:.*"
 
         # Fix some dragging issues with XWayland
-        "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+        "nofocus, class:^$, title:^$, xwayland:1, floating:1, fullscreen:0, pinned:0"
+
+        # CopyQ
+        "float, initialClass:^com.github.hluk.copyq$"
+        "move onscreen cursor -320 -240, initialClass:^com.github.hluk.copyq$"
+        "size 640 480, initialClass:^com.github.hluk.copyq$"
+
+        # Gimp
+        "float, initialTitle:^Export Image as.*$"
+
+        # Steam
+        "pseudo, initialClass:^(steam)$, initialTitle:^(?!.*Steam).*$"
+        "pseudo, class:^(steam)$, title:^(Friends List)$"
+        "fullscreen, initialClass:steam_app_default"
+
+        # Fullscreen Kodi
+        "fullscreen, initialClass:Kodi"
       ];
+    };
+
+    systemd = {
+      enable = true;
+      enableXdgAutostart = true;
+      variables = [ "--all" ];
     };
   };
 }
