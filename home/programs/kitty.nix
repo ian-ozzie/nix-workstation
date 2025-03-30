@@ -75,8 +75,8 @@ in
         map alt+` move_window_to_top
         map alt+[ prev_window
         map alt+] next_window
-        map ctrl+shift+' layout_action rotate
-        map ctrl+shift+; next_layout
+        map alt+j layout_action rotate
+        map alt+\ next_layout
 
         map ctrl+left neighboring_window left
         map ctrl+right neighboring_window right
