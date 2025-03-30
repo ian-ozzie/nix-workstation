@@ -132,18 +132,24 @@ in
 
               "Gimp-2.10" = " ";
               "Gimp-3.0" = " ";
+              "OrcaSlicer" = "󰹜 ";
               "QIDISlicer" = "󰹜 ";
+              "gimp" = " ";
               "openscad" = "󰻫 ";
               "org.inkscape.Inkscape" = " ";
 
+              "Feishin" = " ";
               "Supersonic" = " ";
+              "com.github.th_ch.youtube_music" = " ";
               "org.strawberrymusicplayer.strawberry" = "󰁧 ";
 
+              "Kodi" = "󰤚 ";
               "LosslessCut" = "󱦩 ";
               "com.obsproject.Studio" = "󱜠 ";
               "vlc" = "󰕼 ";
 
               "discord" = " ";
+              "epicgameslauncher.exe" = "󰊗 ";
               "net.lutris.Lutris" = " ";
               "steam" = " ";
             };
