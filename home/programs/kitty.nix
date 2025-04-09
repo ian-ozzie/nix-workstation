@@ -53,45 +53,60 @@ in
         tab_bar_style = "powerline";
         tab_switch_strategy = "right";
         tab_title_max_length = "24";
+        tab_title_template = "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.tab}{index}: {title}{tab.last_focused_progress_percent}";
+
+        clear_all_shortcuts = "yes";
       };
 
+      keybindings = {
+        "ctrl+t" = "new_tab";
+        "ctrl+tab" = "next_tab";
+        "ctrl+shift+tab" = "previous_tab";
+        "ctrl+shift+t" = "set_tab_title";
+
+        "ctrl+shift+l" = "clear_terminal reset active";
+
+        "ctrl+shift+j" = "scroll_page_down";
+        "ctrl+shift+k" = "scroll_page_up";
+        "ctrl+shift+h" = "show_scrollback";
+        "ctrl+shift+g" = "show_last_command_output";
+
+        "ctrl+shift+v" = "paste_from_clipboard";
+
+        "ctrl+left" = "neighboring_window left";
+        "ctrl+right" = "neighboring_window right";
+        "ctrl+up" = "neighboring_window up";
+        "ctrl+down" = "neighboring_window down";
+        "shift+up" = "move_window up";
+        "shift+left" = "move_window left";
+        "shift+right" = "move_window right";
+        "shift+down" = "move_window down";
+        "ctrl+shift+up" = "launch --location=hsplit";
+        "ctrl+shift+down" = "launch --location=hsplit";
+        "ctrl+shift+left" = "launch --location=vsplit";
+        "ctrl+shift+right" = "launch --location=vsplit";
+
+        "alt+`" = "move_window_to_top";
+        "alt+[" = "prev_window";
+        "alt+]" = "next_window";
+        "alt+j" = "layout_action rotate";
+        "alt+\\" = "next_layout";
+      }
+      // lib.attrsets.mergeAttrsList (
+        map (
+          x:
+          let
+            key = if x == 10 then "0" else toString x;
+            tab = toString x;
+          in
+          {
+            "alt+${key}" = "goto_tab ${tab}";
+          }
+        ) (lib.lists.range 1 10)
+      );
+
       extraConfig = ''
-        clear_all_shortcuts yes
-
-        map ctrl+t new_tab
-        map ctrl+tab next_tab
-        map ctrl+shift+tab previous_tab
-        map ctrl+shift+t set_tab_title
-
-        map ctrl+shift+l clear_terminal reset active
-
-        map ctrl+shift+j scroll_page_down
-        map ctrl+shift+k scroll_page_up
-        map ctrl+shift+h show_scrollback
-        map ctrl+shift+g show_last_command_output
-
-        map ctrl+shift+v paste_from_clipboard
-
-        map alt+` move_window_to_top
-        map alt+[ prev_window
-        map alt+] next_window
-        map alt+j layout_action rotate
-        map alt+\ next_layout
-
-        map ctrl+left neighboring_window left
-        map ctrl+right neighboring_window right
-        map ctrl+up neighboring_window up
-        map ctrl+down neighboring_window down
-        map shift+up move_window up
-        map shift+left move_window left
-        map shift+right move_window right
-        map shift+down move_window down
-        map ctrl+shift+up launch --location=hsplit
-        map ctrl+shift+down launch --location=hsplit
-        map ctrl+shift+left launch --location=vsplit
-        map ctrl+shift+right launch --location=vsplit
-
-        # Colours here to come after theme include
+        # Colours here to override stylix theme include
         active_border_color ${highlight}
         active_tab_background ${accent}
         active_tab_foreground ${lowlight}
