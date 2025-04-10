@@ -37,7 +37,7 @@ in
 
       languages = {
         enableExtraDiagnostics = true;
-        enableFormat = true;
+        enableFormat = false;
         enableLSP = true;
         enableTreesitter = true;
         nix.enable = true;
@@ -52,7 +52,6 @@ in
         lightbulb.enable = false;
         lspSignature.enable = true;
         lspkind.enable = false;
-        lsplines.enable = false;
         lspsaga.enable = false;
         nvim-docs-view.enable = false;
         otter-nvim.enable = false;
