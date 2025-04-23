@@ -74,9 +74,9 @@ in
         # Screenshots
         "ALT SHIFT, 1, exec, hyprpicker -a -f hex"
         "CTRL ALT SHIFT, 1, exec, hyprpicker -a -f rgb"
-        "ALT SHIFT, 2, exec, hyprshot -m output -r stdout | swappy -f -"
-        "ALT SHIFT, 3, exec, hyprshot -m window -r stdout | swappy -f -"
-        "ALT SHIFT, 4, exec, hyprshot -m region -r stdout | swappy -f -"
+        "ALT SHIFT, 2, exec, hyprshot -z -m output -r stdout | swappy -f -"
+        "ALT SHIFT, 3, exec, hyprshot -z -m window -r stdout | swappy -f -"
+        "ALT SHIFT, 4, exec, hyprshot -z -m region -r stdout | swappy -f -"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
@@ -109,9 +109,13 @@ in
 
       bindel = [
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        "$mainMod, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        "$mainMod, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
         ", XF86MonBrightnessUp, exec, brightnessctl set 10%+"
+        "$mainMod, XF86MonBrightnessUp, exec, brightnessctl set 1%+"
         ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
+        "$mainMod, XF86MonBrightnessDown, exec, brightnessctl set 1%-"
       ];
 
       bindl = [
