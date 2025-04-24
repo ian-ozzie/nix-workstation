@@ -78,6 +78,9 @@ in
 
       # Disable mouse support
       mouse = "";
+
+      # Allow cursor to move beyond the last character on a line
+      virtualedit = "onemore";
     };
   };
 }
