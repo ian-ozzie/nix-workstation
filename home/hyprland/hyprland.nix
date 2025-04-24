@@ -197,7 +197,7 @@ in
 
       general = {
         "$browser" = "firefox";
-        "$explorer" = "kitty -1 yazi";
+        "$explorer" = "pcmanfm";
         "$mainMod" = "SUPER";
         "$menu" = "tofi-drun --width 640 --height 360";
         "$terminal" = "kitty";
