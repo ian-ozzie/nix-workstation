@@ -125,6 +125,7 @@ in
               "kitty" = " ";
               "librewolf" = " ";
               "obsidian" = " ";
+              "pcmanfm" = " ";
 
               "1Password" = "󰢁 ";
               "Slack" = " ";

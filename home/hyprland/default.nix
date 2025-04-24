@@ -25,6 +25,7 @@
     hyprpolkitagent
     hyprshot
     hyprsunset
+    pcmanfm
     playerctl
     swappy
   ];
