@@ -65,6 +65,7 @@ in
         "ctrl+shift+t" = "set_tab_title";
 
         "ctrl+shift+l" = "clear_terminal reset active";
+        "ctrl+shift+w" = "close_window";
 
         "ctrl+shift+j" = "scroll_page_down";
         "ctrl+shift+k" = "scroll_page_up";
