@@ -13,6 +13,7 @@
     ./hyprland.nix
     ./hyprlock.nix
     ./hyprpaper.nix
+    ./swappy.nix
     ./swaync.nix
     ./tofi.nix
     ./waybar.nix
@@ -27,7 +28,6 @@
     hyprsunset
     pcmanfm
     playerctl
-    swappy
   ];
 
   ozzie.workstation = {
