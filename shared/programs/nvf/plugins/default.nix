@@ -38,7 +38,6 @@ in
       languages = {
         enableExtraDiagnostics = true;
         enableFormat = false;
-        enableLSP = true;
         enableTreesitter = true;
         nix.enable = true;
         php.enable = true;
