@@ -330,6 +330,10 @@ in
           background-color: @highlight;
         }
 
+        window .modules-left #idle_inhibitor.activated {
+          background-color: @urgent;
+        }
+
         window .modules-left #custom-yubikey {
           background-color: @lowlight;
           border-bottom: 2px solid @accent;
