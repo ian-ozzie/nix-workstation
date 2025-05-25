@@ -14,6 +14,7 @@ in
     ./lastplace.nix
     ./motion.nix
     ./rainbow-delimiters.nix
+    ./spaceless.nix
     ./statusline.nix
     ./surround.nix
     ./tabstop.nix
