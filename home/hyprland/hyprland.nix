@@ -24,6 +24,9 @@ in
     xwayland.enable = true;
 
     extraConfig = ''
+      # Uncomment to have logs
+      # debug:disable_logs = false
+
       # Ref https://wiki.hyprland.org/Configuring/Workspace-Rules/
       # "Smart gaps" / "No gaps when only"
       workspace = w[tv1], gapsout:0, gapsin:0
@@ -83,6 +86,13 @@ in
         "$mainMod, right, movefocus, r"
         "$mainMod, up, movefocus, u"
         "$mainMod, down, movefocus, d"
+
+        # Zoom hyprland
+        "$mainMod, mouse:274, exec, hyprctl keyword cursor:zoom_factor 1"
+        "$mainMod, mouse_down, exec, hyprctl getoption cursor:zoom_factor | grep float | awk '{ system(\"hyprctl keyword cursor:zoom_factor \" $2 * 1.1) }'"
+        "$mainMod, mouse_up, exec, hyprctl getoption cursor:zoom_factor | grep float | awk '{ if($2!=1) system(\"hyprctl keyword cursor:zoom_factor \" $2 * 0.9) }'"
+        "$mainMod, equal, exec, hyprctl getoption cursor:zoom_factor | grep float | awk '{ system(\"hyprctl keyword cursor:zoom_factor \" $2 * 1.1) }'"
+        "$mainMod, minus, exec, hyprctl getoption cursor:zoom_factor | grep float | awk '{ if($2!=1) system(\"hyprctl keyword cursor:zoom_factor \" $2 * 0.9) }'"
 
         # Scratchpad workspace
         "$mainMod, S, togglespecialworkspace, magic"
