@@ -273,6 +273,9 @@ in
 
         # Fullscreen Kodi
         "fullscreen, initialClass:Kodi"
+
+        # Center Browsers picker under cursor
+        "move onscreen cursor -50% -50%,float,initialClass:browsers"
       ];
     };
 
