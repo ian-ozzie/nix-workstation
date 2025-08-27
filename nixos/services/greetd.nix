@@ -22,13 +22,12 @@ in
   config = lib.mkIf cfg.enable {
     services.greetd = {
       enable = true;
-      vt = 2;
 
       settings.default_session = {
         user = "greeter";
 
         command = builtins.concatStringsSep " " [
-          "${lib.getExe pkgs.greetd.tuigreet}"
+          "${lib.getExe pkgs.tuigreet}"
           "--remember"
           "--remember-session"
           "--time"

@@ -19,13 +19,9 @@
   };
 
   services = {
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
     thermald.enable = true;
     uptimed.enable = true;
-
-    xserver = {
-      desktopManager.gnome.enable = true;
-      displayManager.gdm.enable = true;
-      enable = true;
-    };
   };
 }
