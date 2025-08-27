@@ -262,6 +262,12 @@ in
         "size 640 480, initialClass:com.github.hluk.copyq"
         "tag +dialog, initialClass:com.github.hluk.copyq"
 
+        # Disable screenshare on private windows
+        "noscreenshare, class:1Password"
+        "noscreenshare, class:Bitwarden"
+        "noscreenshare, class:librewolf"
+        "noscreenshare, tag:dialog"
+
         # File handling popups: Treat as dialog
         "size 960 640, title:^.*(Export Image|Location|Open|Progress|Save File|wants to save|wants to open).*$"
         "tag +dialog, title:^.*(Export Image|Location|Open|Progress|Save File|wants to save|wants to open).*$"
