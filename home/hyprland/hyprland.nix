@@ -27,14 +27,17 @@ in
       # Uncomment to have logs
       # debug:disable_logs = false
 
+      # Ignore maximize requests from apps
+      windowrule = suppressevent maximize, class:.*
+
       # Ref https://wiki.hyprland.org/Configuring/Workspace-Rules/
       # "Smart gaps" / "No gaps when only"
       workspace = w[tv1], gapsout:0, gapsin:0
       workspace = f[1], gapsout:0, gapsin:0
-      windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
-      windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
-      windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
-      windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
+      windowrule = bordersize 0, floating:0, onworkspace:w[tv1]
+      windowrule = rounding 0, floating:0, onworkspace:w[tv1]
+      windowrule = bordersize 0, floating:0, onworkspace:f[1]
+      windowrule = rounding 0, floating:0, onworkspace:f[1]
     '';
 
     settings = {
@@ -251,31 +254,35 @@ in
         mouse_move_enables_dpms = true;
       };
 
-      windowrulev2 = [
-        # Ignore maximize requests from apps. You'll probably like this.
-        "suppressevent maximize, class:.*"
+      windowrule = [
+        # Browsers: Treat as dialog, let it control size
+        "tag +dialog, initialClass:browsers"
 
-        # Fix some dragging issues with XWayland
-        "nofocus, class:^$, title:^$, xwayland:1, floating:1, fullscreen:0, pinned:0"
+        # CopyQ: Treat as dialog
+        "size 640 480, initialClass:com.github.hluk.copyq"
+        "tag +dialog, initialClass:com.github.hluk.copyq"
 
-        # CopyQ
-        "float, initialClass:^com.github.hluk.copyq$"
-        "move onscreen cursor -320 -240, initialClass:^com.github.hluk.copyq$"
-        "size 640 480, initialClass:^com.github.hluk.copyq$"
+        # File handling popups: Treat as dialog
+        "size 960 640, title:^.*(Export Image|Location|Open|Progress|Save File|wants to save|wants to open).*$"
+        "tag +dialog, title:^.*(Export Image|Location|Open|Progress|Save File|wants to save|wants to open).*$"
 
-        # Gimp
-        "float, initialTitle:^Export Image as.*$"
-
-        # Steam
-        "pseudo, initialClass:^(steam)$, initialTitle:^(?!.*Steam).*$"
-        "pseudo, class:^(steam)$, title:^(Friends List)$"
-        "fullscreen, initialClass:steam_app_default"
-
-        # Fullscreen Kodi
+        # Kodi: Fullscreen
         "fullscreen, initialClass:Kodi"
 
-        # Center Browsers picker under cursor
-        "move onscreen cursor -50% -50%,float,initialClass:browsers"
+        # Picture-in-Picture: Float bottom right
+        "float, title:Picture-in-Picture"
+        "move 100%-656 100%-376, title:Picture-in-Picture"
+        "size 640 360, title:Picture-in-Picture"
+
+        # Steam: Fullscreen games
+        "fullscreen, initialClass:steam_app_default"
+      ]
+      ++ [
+        # Tag rules
+        # Dialog: Center under cursor
+        "float, tag:dialog"
+        "move onscreen cursor -50% -50%, tag:dialog"
+        "pin, tag:dialog"
       ];
     };
 
