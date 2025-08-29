@@ -67,8 +67,8 @@ in
             ];
 
             states = {
-              warning = 30;
-              critical = 15;
+              warning = 15;
+              critical = 5;
             };
           };
 
@@ -328,6 +328,25 @@ in
 
         window .modules-left #idle_inhibitor:hover {
           background-color: @highlight;
+        }
+
+        window .modules-right #battery {
+          background-color: @lowlight;
+          border-bottom: 2px solid @accent;
+          font-size: 14px;
+          transition: background 0.2s ease-in-out;
+        }
+
+        window .modules-right #battery.warning.discharging {
+          background-color: @urgent;
+        }
+
+        window .modules-right #battery.critical.charging {
+          background-color: @urgent;
+        }
+
+        window .modules-right #battery.critical.discharging {
+          animation: pulse-alert 5s infinite;
         }
 
         window .modules-left #idle_inhibitor.activated {
