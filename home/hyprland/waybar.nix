@@ -268,98 +268,96 @@ in
           padding: 0 8px;
         }
 
-        window .modules-left #workspaces {
-          padding: 0;
+        window #battery {
+          background-color: @lowlight;
+          border-bottom: 2px solid @accent;
+          font-size: 14px;
+          transition: background 0.2s ease-in-out;
         }
 
-        window .modules-left #custom-logout {
+        window #battery.warning.discharging {
+          background-color: @alert;
+        }
+
+        window #battery.critical.charging {
+          background-color: @alert;
+        }
+
+        window #battery.critical.discharging {
+          animation: pulse-alert 5s infinite;
+        }
+
+        window #custom-logout {
           background-color: @lowlight;
           border-bottom: 2px solid @accent;
           transition: background 0.2s ease-in-out;
         }
 
-        window .modules-left #custom-logout:hover {
+        window #custom-logout:hover {
           background-color: @highlight;
           border-bottom: 2px solid @accent;
         }
 
-        window .modules-left #workspaces button {
-          border-bottom: 0;
+        window #custom-yubikey {
+          background-color: @lowlight;
+          border-bottom: 2px solid @accent;
+          color: @accent;
+        }
+
+        window #custom-yubikey.alert {
+          animation: pulse-alert 5s infinite;
+        }
+
+        window #idle_inhibitor {
+          background-color: @lowlight;
+          border-bottom: 2px solid @accent;
+          font-size: 14px;
+          transition: background 0.2s ease-in-out;
+        }
+
+        window #idle_inhibitor:hover {
+          background-color: @highlight;
+        }
+
+        window #idle_inhibitor.activated {
+          background-color: @alert;
+        }
+
+        window #workspaces {
+          padding: 0;
+        }
+
+        window #workspaces button {
+          border-bottom-width: 0;
           border-left: 1px solid @accent;
-          border-right: 0;
-          border-top: 0;
           color: @accent;
           font-weight: 400;
           padding: 0 0 0 8px;
           transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
         }
 
-        window .modules-left #workspaces button:first-child {
+        window #workspaces button:first-child {
           border-left: 0;
         }
 
-        window .modules-left #workspaces button:hover {
+        window #workspaces button:hover {
           background: @highlight;
           border-top: 0;
           box-shadow: inherit;
           text-shadow: inherit;
         }
 
-        window .modules-left #workspaces button.focused,
-        window .modules-left #workspaces button.active {
+        window #workspaces button.focused,
+        window #workspaces button.active {
           background-color: @accent;
-          border: 0;
+          border-bottom-width: 0;
           color: @lowlight;
           font-weight: 700;
         }
 
-        window .modules-left #workspaces button.urgent {
+        window #workspaces button.urgent {
           background-color: @lowlight;
           color: @accent;
-          animation: pulse-alert 5s infinite;
-        }
-
-        window .modules-left #idle_inhibitor {
-          background-color: @lowlight;
-          border-bottom: 2px solid @accent;
-          font-size: 14px;
-          transition: background 0.2s ease-in-out;
-        }
-
-        window .modules-left #idle_inhibitor:hover {
-          background-color: @highlight;
-        }
-
-        window .modules-right #battery {
-          background-color: @lowlight;
-          border-bottom: 2px solid @accent;
-          font-size: 14px;
-          transition: background 0.2s ease-in-out;
-        }
-
-        window .modules-right #battery.warning.discharging {
-          background-color: @urgent;
-        }
-
-        window .modules-right #battery.critical.charging {
-          background-color: @urgent;
-        }
-
-        window .modules-right #battery.critical.discharging {
-          animation: pulse-alert 5s infinite;
-        }
-
-        window .modules-left #idle_inhibitor.activated {
-          background-color: @urgent;
-        }
-
-        window .modules-left #custom-yubikey {
-          background-color: @lowlight;
-          border-bottom: 2px solid @accent;
-          color: @accent;
-        }
-
-        window .modules-left #custom-yubikey.alert {
           animation: pulse-alert 5s infinite;
         }
       '';
