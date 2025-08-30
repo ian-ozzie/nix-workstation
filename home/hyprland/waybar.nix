@@ -382,8 +382,12 @@ in
     };
 
     wayland.windowManager.hyprland.settings = {
-      bind = [ "$mainMod SHIFT, B, exec, pkill waybar || waybar" ];
       exec-once = [ "waybar" ];
+
+      bind = [
+        "$mainMod SHIFT, B, exec, pkill waybar || waybar"
+        "$mainMod CTRL SHIFT, B, exec, pkill waybar || GTK_DEBUG=interactive waybar"
+      ];
     };
   };
 }
