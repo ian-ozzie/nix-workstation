@@ -4,5 +4,6 @@
     ../workstation
 
     ./programs
+    ./services
   ];
 }
