@@ -23,6 +23,12 @@ in
   config = lib.mkIf cfg.enable {
     stylix.targets.librewolf.enable = false;
 
+    home.activation.removeLibrewolfBackups = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+      if [ -f "${config.home.homeDirectory}/files/programs/librewolf/profile/search.json.mozlz4.backup" ]; then
+        rm -f ${config.home.homeDirectory}/files/programs/librewolf/profile/search.json.mozlz4.backup
+      fi
+    '';
+
     programs.librewolf = {
       enable = true;
       package = with pkgs; librewolf;
