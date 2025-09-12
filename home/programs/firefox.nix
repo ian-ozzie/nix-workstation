@@ -15,6 +15,12 @@ in
   config = lib.mkIf cfg.enable {
     stylix.targets.firefox.enable = false;
 
+    home.activation.removeFirefoxBackups = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+      if [ -f "${config.home.homeDirectory}/files/programs/firefox/profile/search.json.mozlz4.backup" ]; then
+        rm -f ${config.home.homeDirectory}/files/programs/firefox/profile/search.json.mozlz4.backup
+      fi
+    '';
+
     programs.firefox = {
       enable = true;
       package = with pkgs; firefox;
