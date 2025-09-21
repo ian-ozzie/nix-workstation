@@ -9,6 +9,7 @@ in
 {
   options.ozzie.workstation.nvf = {
     enable = lib.mkEnableOption "opinionated nvf config";
+    clipboard = lib.mkEnableOption "opinionated nvf clipboard handling";
   };
 
   imports = [
@@ -25,6 +26,7 @@ in
       enableManpages = true;
 
       settings.vim = {
+        clipboard.enable = lib.mkDefault cfg.clipboard;
         viAlias = lib.mkDefault true;
         vimAlias = lib.mkDefault true;
 
