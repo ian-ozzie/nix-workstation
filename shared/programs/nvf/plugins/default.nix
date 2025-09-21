@@ -43,6 +43,7 @@ in
         enableTreesitter = true;
         php.enable = true;
         tailwind.enable = true;
+        ts.enable = true;
 
         nix = {
           enable = true;
@@ -52,6 +53,7 @@ in
           lsp = {
             package = pkgs.nixd;
             server = "nixd";
+
             options = {
               formatting.command = [ "nixfmt" ];
               nixpkgs.expr = "import <nixpkgs> { }";
@@ -63,13 +65,21 @@ in
       lsp = {
         enable = true;
         formatOnSave = false;
+        inlayHints.enable = true;
         lightbulb.enable = false;
         lspSignature.enable = true;
         lspkind.enable = false;
         lspsaga.enable = false;
         nvim-docs-view.enable = false;
         otter-nvim.enable = false;
-        trouble.enable = true;
+
+        trouble = {
+          enable = true;
+
+          setupOpts = {
+            auto_close = true;
+          };
+        };
       };
 
       notes = {
@@ -77,6 +87,8 @@ in
       };
 
       ui = {
+        illuminate.enable = true;
+
         smartcolumn = {
           enable = true;
 
@@ -89,6 +101,21 @@ in
 
       utility = {
         ccc.enable = true;
+        yanky-nvim.enable = true;
+
+        images.image-nvim = {
+          enable = true;
+          setupOpts.backend = "kitty";
+        };
+
+        nvim-biscuits = {
+          enable = true;
+          setupOpts.cursor_line_only = true;
+        };
+      };
+
+      visuals = {
+        highlight-undo.enable = true;
       };
     };
   };
