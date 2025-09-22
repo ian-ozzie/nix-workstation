@@ -70,17 +70,50 @@ in
               urls = [ { template = "https://www.youtube.com/results?search_query={searchTerms}"; } ];
             };
 
+            nixpkgs = {
+              definedAliases = [ "nixpkgs" ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              name = "Nixpkgs Github";
+
+              urls = [
+                {
+                  template = "https://github.com/search?type=pullrequests&s=created&o=desc&q=repo:NixOS%2Fnixpkgs+{searchTerms}";
+                }
+              ];
+            };
             nix-git = {
               definedAliases = [ "nix-git" ];
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               name = "Nix Code Github";
               urls = [ { template = "https://github.com/search?type=code&q=lang:nix+{searchTerms}"; } ];
             };
+            nix-hardware = {
+              definedAliases = [ "nix-hardware" ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              name = "NixOS Hardware";
+
+              urls = [
+                {
+                  template = "https://github.com/search?type=pullrequests&s=created&o=desc&q=repo:NixOS%2Fnixos-hardware+{searchTerms}";
+                }
+              ];
+            };
             nix-home = {
               definedAliases = [ "nix-home" ];
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               name = "Home Manager Options";
               urls = [ { template = "https://home-manager-options.extranix.com/?query={searchTerms}"; } ];
+            };
+            nix-nvf = {
+              definedAliases = [ "nix-nvf" ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              name = "Nix nvf";
+
+              urls = [
+                {
+                  template = "https://github.com/search?type=pullrequests&s=created&o=desc&q=repo:NotAShelf%2Fnvf+{searchTerms}";
+                }
+              ];
             };
             nix-opt = {
               definedAliases = [ "nix-opt" ];
@@ -93,6 +126,17 @@ in
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               name = "NixOS Packages";
               urls = [ { template = "https://search.nixos.org/packages?query={searchTerms}"; } ];
+            };
+            nix-stylix = {
+              definedAliases = [ "nix-stylix" ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              name = "Nix stylix";
+
+              urls = [
+                {
+                  template = "https://github.com/search?type=pullrequests&s=created&o=desc&q=repo:nix-community%2Fstylix+{searchTerms}";
+                }
+              ];
             };
             nix-wiki = {
               definedAliases = [ "nix-wiki" ];
