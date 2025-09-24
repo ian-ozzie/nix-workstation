@@ -24,7 +24,14 @@ in
     '';
 
     packages = with pkgs; [
+      hyprshot
       swappy
     ];
   };
+
+  wayland.windowManager.hyprland.settings.bind = [
+    "ALT SHIFT, 2, exec, hyprshot -z -m output -r stdout | swappy -f -"
+    "ALT SHIFT, 3, exec, hyprshot -z -m window -r stdout | swappy -f -"
+    "ALT SHIFT, 4, exec, hyprshot -z -m region -r stdout | swappy -f -"
+  ];
 }
