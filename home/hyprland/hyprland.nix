@@ -77,10 +77,6 @@ in
         "$mainMod, code:34, cyclenext" # code:34 = [
         "$mainMod, code:35, cyclenext, prev" # code:35 = ]
 
-        # Screenshots
-        "ALT SHIFT, 1, exec, hyprpicker -a -f hex"
-        "CTRL ALT SHIFT, 1, exec, hyprpicker -a -f rgb"
-
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
