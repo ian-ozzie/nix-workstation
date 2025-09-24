@@ -80,9 +80,6 @@ in
         # Screenshots
         "ALT SHIFT, 1, exec, hyprpicker -a -f hex"
         "CTRL ALT SHIFT, 1, exec, hyprpicker -a -f rgb"
-        "ALT SHIFT, 2, exec, hyprshot -z -m output -r stdout | swappy -f -"
-        "ALT SHIFT, 3, exec, hyprshot -z -m window -r stdout | swappy -f -"
-        "ALT SHIFT, 4, exec, hyprshot -z -m region -r stdout | swappy -f -"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"

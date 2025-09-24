@@ -13,8 +13,8 @@
     ./hyprland.nix
     ./hyprlock.nix
     ./hyprpaper.nix
+    ./hyprshot.nix
     ./hyprsunset.nix
-    ./swappy.nix
     ./swaync.nix
     ./tofi.nix
     ./waybar.nix
@@ -25,7 +25,6 @@
     hyprcursor
     hyprpicker
     hyprpolkitagent
-    hyprshot
     pcmanfm
     playerctl
   ];
