@@ -13,6 +13,7 @@
     ./hyprland.nix
     ./hyprlock.nix
     ./hyprpaper.nix
+    ./hyprpicker.nix
     ./hyprshot.nix
     ./hyprsunset.nix
     ./swaync.nix
@@ -23,7 +24,6 @@
 
   home.packages = with pkgs; [
     hyprcursor
-    hyprpicker
     hyprpolkitagent
     pcmanfm
     playerctl
