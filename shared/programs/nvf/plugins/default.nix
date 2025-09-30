@@ -38,6 +38,7 @@ in
       };
 
       languages = {
+        bash.enable = true;
         enableExtraDiagnostics = true;
         enableFormat = false;
         enableTreesitter = true;
