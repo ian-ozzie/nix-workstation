@@ -1,14 +1,15 @@
 {
-  pkgs,
+  config,
+  lib,
   ...
 }:
+let
+  cfg = config.ozzie.workstation.hyprpolkitagent;
+in
 {
-  services.hyprpolkitagent = {
-    enable = true;
-    package = pkgs.hyprpolkitagent;
+  config = lib.mkIf cfg.enable {
+    wayland.windowManager.hyprland.settings.exec-once = [
+      "systemctl --user start hyprpolkitagent"
+    ];
   };
-
-  wayland.windowManager.hyprland.settings.exec-once = [
-    "systemctl --user start hyprpolkitagent"
-  ];
 }
