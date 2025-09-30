@@ -35,6 +35,7 @@
     hyprpaper.enable = lib.mkDefault true;
     hyprpicker.enable = lib.mkDefault true;
     hyprpolkitagent.enable = lib.mkDefault true;
+    hyprsunset.enable = lib.mkDefault true;
     swappy.enable = lib.mkDefault true;
     tofi.enable = lib.mkDefault true;
     waybar.enable = lib.mkDefault true;
