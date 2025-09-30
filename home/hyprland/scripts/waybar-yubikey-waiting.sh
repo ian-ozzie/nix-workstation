@@ -10,16 +10,17 @@ send () {
 while true; do
   if [ ! -e "$SOCKET" ]; then
     send '󱦃  waiting for socket' 'notice'
-    while [ ! -e "$SOCKET" ]; do sleep $INTERVAL; done
+    while [[ ! -e $SOCKET ]]; do sleep $INTERVAL; done
   fi
 
   send
 
-  nc -U $SOCKET | while read -r -n5 message; do
+  # https://github.com/maximbaz/yubikey-touch-detector#notifierunix_socket
+  nc -U "$SOCKET" | while read -r -n5 message; do
     type="${message:0:3}"
     status="${message:4:1}"
 
-    if [ $status -eq 0 ]; then
+    if [[ $status -eq 0 ]]; then
       send
     else
       send "󱦃 ${type}" 'alert' "YubiKey needs a touch, trigger: ${type}"
