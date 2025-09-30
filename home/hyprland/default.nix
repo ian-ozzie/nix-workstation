@@ -40,6 +40,7 @@
     kitty.binds = lib.mkDefault true;
     kitty.enable = lib.mkDefault true;
     pcmanfm.enable = lib.mkDefault true;
+    starship.enable = lib.mkDefault true;
     swappy.enable = lib.mkDefault true;
     tofi.enable = lib.mkDefault true;
     waybar.enable = lib.mkDefault true;
