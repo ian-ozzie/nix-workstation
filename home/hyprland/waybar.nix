@@ -12,6 +12,7 @@ let
   inherit (config.ozzie.workstation.theme.colours)
     accent
     alert
+    base
     highlight
     lowlight
     ;
@@ -276,6 +277,7 @@ in
       style = ''
         @define-color accent ${accent};
         @define-color alert ${alert};
+        @define-color base ${base};
         @define-color highlight ${highlight};
         @define-color lowlight ${lowlight};
 
@@ -289,7 +291,7 @@ in
         }
 
         window#waybar {
-          background: @lowlight;
+          background: @base;
           border-bottom: 2px solid @accent;
           color: @accent;
         }
@@ -313,7 +315,7 @@ in
         }
 
         window #battery {
-          background-color: @lowlight;
+          background-color: @base;
           border-bottom: 2px solid @accent;
           font-size: 14px;
           transition: background 0.2s ease-in-out;
@@ -332,7 +334,7 @@ in
         }
 
         window #custom-logout {
-          background-color: @lowlight;
+          background-color: @base;
           border-bottom: 2px solid @accent;
           transition: background 0.2s ease-in-out;
         }
@@ -343,7 +345,7 @@ in
         }
 
         window #custom-swaync {
-          background-color: @lowlight;
+          background-color: @base;
           border-bottom: 2px solid @accent;
           padding-right: 11px;
           transition: background 0.2s ease-in-out;
@@ -355,7 +357,7 @@ in
         }
 
         window #custom-yubikey {
-          background-color: @lowlight;
+          background-color: @base;
           border-bottom: 2px solid @accent;
           color: @accent;
         }
@@ -365,7 +367,7 @@ in
         }
 
         window #idle_inhibitor {
-          background-color: @lowlight;
+          background-color: @base;
           border-bottom: 2px solid @accent;
           font-size: 14px;
           transition: background 0.2s ease-in-out;
@@ -412,7 +414,7 @@ in
         }
 
         window #workspaces button.urgent {
-          background-color: @lowlight;
+          background-color: @base;
           color: @accent;
           animation: pulse-alert 5s infinite;
         }
