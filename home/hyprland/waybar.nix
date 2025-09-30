@@ -5,6 +5,10 @@
   ...
 }:
 let
+  inherit (config.ozzie.workstation)
+    swaync
+    ;
+
   inherit (config.ozzie.workstation.theme.colours)
     accent
     alert
@@ -65,7 +69,8 @@ in
             "temperature"
             "battery"
             "clock"
-          ];
+          ]
+          ++ lib.optional swaync.enable "custom/swaync";
 
           battery = {
             format = "{icon}  {capacity}%";
@@ -114,6 +119,25 @@ in
             format = "󰗽";
             on-click = "wlogout -b 4";
             tooltip = false;
+          };
+
+          "custom/swaync" = lib.mkIf swaync.enable {
+            escape = true;
+            exec = "swaync-client -swb";
+            exec-if = "which swaync-client";
+            format = "{icon}";
+            on-click = "swaync-client -t -sw";
+            on-click-middle = "pkill swaync || swaync";
+            on-click-right = "swaync-client -d -sw";
+            return-type = "json";
+            tooltip = false;
+
+            format-icons = {
+              "dnd-none" = "";
+              "dnd-notification" = "";
+              "none" = "";
+              "notification" = "";
+            };
           };
 
           "custom/yubikey" = {
@@ -314,6 +338,18 @@ in
         }
 
         window #custom-logout:hover {
+          background-color: @highlight;
+          border-bottom: 2px solid @accent;
+        }
+
+        window #custom-swaync {
+          background-color: @lowlight;
+          border-bottom: 2px solid @accent;
+          padding-right: 11px;
+          transition: background 0.2s ease-in-out;
+        }
+
+        window #custom-swaync:hover {
           background-color: @highlight;
           border-bottom: 2px solid @accent;
         }
