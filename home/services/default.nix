@@ -5,5 +5,6 @@
     ./hyprpaper.nix
     ./hyprpolkitagent.nix
     ./hyprsunset.nix
+    ./swaync.nix
   ];
 }
