@@ -42,6 +42,12 @@
         type = lib.types.str;
       };
 
+      base = lib.mkOption {
+        default = "#11111b";
+        description = "Base colour";
+        type = lib.types.str;
+      };
+
       highlight = lib.mkOption {
         default = "#791aea";
         description = "Highlight colour";
@@ -51,6 +57,24 @@
       lowlight = lib.mkOption {
         default = "#1e1e2e";
         description = "Lowlight colour";
+        type = lib.types.str;
+      };
+    };
+
+    nerd-font = {
+      name = lib.mkOption {
+        default = "DejaVuSansM Nerd Font";
+        description = "Nerd font name";
+        type = lib.types.str;
+      };
+
+      package = lib.mkPackageOption pkgs.nerd-fonts "dejavu-sans-mono" { } // {
+        description = "Nerd font package";
+      };
+
+      ttf = lib.mkOption {
+        default = "${pkgs.nerd-fonts.dejavu-sans-mono}/share/fonts/truetype/NerdFonts/DejaVuSansM/DejaVuSansMNerdFontMono-Regular.ttf";
+        description = "Path to nerd font TTF for direct reference";
         type = lib.types.str;
       };
     };

@@ -27,8 +27,8 @@ in
       };
 
       monospace = {
-        name = lib.mkDefault "DejaVuSansM Nerd Font";
-        package = lib.mkDefault pkgs.nerd-fonts.dejavu-sans-mono;
+        name = lib.mkDefault theme.nerd-font.name;
+        package = lib.mkDefault theme.nerd-font.package;
       };
 
       sansSerif = {
