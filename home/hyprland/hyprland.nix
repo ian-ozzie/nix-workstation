@@ -7,6 +7,7 @@
 let
   inherit (config.ozzie.workstation.theme) colours;
 
+  base = lib.strings.removePrefix "#" colours.base;
   highlight = lib.strings.removePrefix "#" colours.highlight;
   lowlight = lib.strings.removePrefix "#" colours.lowlight;
 in
@@ -59,9 +60,6 @@ in
       };
 
       bind = [
-        "$mainMod, W, exec, $browser"
-        "$mainMod, L, exec, hyprlock --immediate"
-
         "ALT, F4, killactive"
         "ALT SHIFT, F4, forcekillactive"
         "CTRL ALT SHIFT, F4, exit"
@@ -159,7 +157,7 @@ in
         };
 
         shadow = {
-          color = lib.mkForce "rgba(${highlight}ff)";
+          color = "rgb(${highlight})";
           enabled = true;
           range = 4;
           render_power = 3;
@@ -198,10 +196,9 @@ in
       ];
 
       general = {
-        "$browser" = "firefox";
         "$mainMod" = "SUPER";
-        "col.active_border" = lib.mkForce "rgba(${highlight}ff)";
-        "col.inactive_border" = lib.mkForce "rgba(${lowlight}ff)";
+        "col.active_border" = "rgb(${highlight})";
+        "col.inactive_border" = "rgb(${lowlight})";
         allow_tearing = false;
         border_size = 1;
         gaps_in = 0;
@@ -234,6 +231,7 @@ in
       };
 
       misc = {
+        background_color = "rgb(${base})";
         disable_hyprland_logo = true;
         force_default_wallpaper = 1;
         key_press_enables_dpms = true;
