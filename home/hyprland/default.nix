@@ -17,6 +17,7 @@
     ./hyprpolkitagent.nix
     ./hyprsunset.nix
     ./kitty.nix
+    ./pcmanfm.nix
     ./swappy.nix
     ./swaync.nix
     ./tofi.nix
@@ -26,7 +27,6 @@
 
   home.packages = with pkgs; [
     hyprcursor
-    pcmanfm
     playerctl
   ];
 
@@ -39,6 +39,7 @@
     hyprsunset.enable = lib.mkDefault true;
     kitty.binds = lib.mkDefault true;
     kitty.enable = lib.mkDefault true;
+    pcmanfm.enable = lib.mkDefault true;
     swappy.enable = lib.mkDefault true;
     tofi.enable = lib.mkDefault true;
     waybar.enable = lib.mkDefault true;

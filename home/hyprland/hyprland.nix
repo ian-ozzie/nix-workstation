@@ -60,7 +60,6 @@ in
 
       bind = [
         "$mainMod, W, exec, $browser"
-        "$mainMod, E, exec, $explorer"
         "$mainMod, R, exec, $menu"
         "$mainMod, L, exec, hyprlock --immediate"
 
@@ -201,7 +200,6 @@ in
 
       general = {
         "$browser" = "firefox";
-        "$explorer" = "pcmanfm";
         "$mainMod" = "SUPER";
         "$menu" = "tofi-drun --width 640 --height 360";
         "col.active_border" = lib.mkForce "rgba(${highlight}ff)";
