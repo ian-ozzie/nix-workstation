@@ -1,66 +1,90 @@
 {
   config,
-  inputs,
+  lib,
   pkgs,
   ...
 }:
 let
-  # TODO: see if there's a more direct/correct way to access this lib
-  accent = inputs.ozzie-workstation.lib.hex2rgb config.ozzie.workstation.theme.colours.accent;
+  inherit (config.ozzie.workstation.theme) colours;
+
+  accent = lib.strings.removePrefix "#" colours.accent;
+  alert = lib.strings.removePrefix "#" colours.alert;
+  highlight = lib.strings.removePrefix "#" colours.highlight;
+  lowlight = lib.strings.removePrefix "#" colours.lowlight;
+
+  hyprlock-now-playing = lib.getExe (
+    pkgs.writeShellApplication {
+      name = "hyprlock-now-playing";
+      text = builtins.readFile ./scripts/hyprlock-now-playing.sh;
+
+      runtimeInputs = with pkgs; [
+        playerctl
+      ];
+    }
+  );
+
+  cfg = config.ozzie.workstation.hyprlock;
 in
 {
-  home.file.".config/hypr/hyprlock-now-playing.sh" = {
-    executable = true;
-    text = builtins.readFile ./scripts/hyprlock-now-playing.sh;
-  };
+  config = lib.mkIf cfg.enable {
+    stylix.targets.hyprlock.enable = false;
 
-  programs.hyprlock = {
-    enable = true;
-    package = with pkgs; hyprlock;
+    programs.hyprlock = {
+      settings = {
+        background = {
+          blur_passes = 2;
+          color = "rgb(${lowlight})";
+          path = lib.mkDefault config.stylix.image;
+        };
 
-    settings = {
-      background = {
-        blur_passes = 2;
+        general = {
+          grace = 5;
+          hide_cursor = true;
+          no_fade_in = true;
+        };
+
+        input-field = {
+          check_color = "rgb(${highlight})";
+          fail_color = "rgb(${alert})";
+          font_color = "rgb(${accent})";
+          hide_input = false;
+          inner_color = "rgb(${lowlight})";
+          outer_color = "rgb(${highlight})";
+          outline_thickness = 2;
+          size = "500, 100";
+        };
+
+        label = [
+          {
+            color = "rgb(${accent})";
+            font_size = 72;
+            halign = "center";
+            position = "0, 200";
+            text = "cmd[update:1000] date +'%-I:%M%p'";
+            valign = "center";
+          }
+          {
+            color = "rgb(${accent})";
+            font_size = 24;
+            halign = "center";
+            position = "0, 300";
+            text = "cmd[update:1000] date +'%A, %B %d'";
+            valign = "center";
+          }
+          {
+            color = "rgb(${accent})";
+            font_size = 24;
+            halign = "center";
+            position = "0, 50";
+            text = "cmd[update:1000] ${hyprlock-now-playing}";
+            valign = "bottom";
+          }
+        ];
       };
-
-      general = {
-        grace = 5;
-        hide_cursor = true;
-        no_fade_in = true;
-      };
-
-      input-field = {
-        hide_input = false;
-        outline_thickness = 2;
-        size = "350, 60";
-      };
-
-      label = [
-        {
-          color = "rgba(${accent}, 1.0)";
-          font_size = 72;
-          halign = "center";
-          position = "0, 200";
-          text = ''cmd[update:1000] date +"%-I:%M%p"'';
-          valign = "center";
-        }
-        {
-          color = "rgba(${accent}, 1.0)";
-          font_size = 24;
-          halign = "center";
-          position = "0, 300";
-          text = ''cmd[update:1000] date +"%A, %B %d"'';
-          valign = "center";
-        }
-        {
-          color = "rgba(${accent}, 1.0)";
-          font_size = 24;
-          halign = "center";
-          position = "0, 50";
-          text = ''cmd[update:1000] ~/.config/hypr/hyprlock-now-playing.sh'';
-          valign = "bottom";
-        }
-      ];
     };
+
+    wayland.windowManager.hyprland.settings.bind = [
+      "$mainMod, L, exec, hyprlock --immediate"
+    ];
   };
 }
