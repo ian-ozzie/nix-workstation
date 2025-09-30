@@ -59,7 +59,6 @@ in
       };
 
       bind = [
-        "$mainMod, Q, exec, $terminal"
         "$mainMod, W, exec, $browser"
         "$mainMod, E, exec, $explorer"
         "$mainMod, R, exec, $menu"
@@ -205,7 +204,6 @@ in
         "$explorer" = "pcmanfm";
         "$mainMod" = "SUPER";
         "$menu" = "tofi-drun --width 640 --height 360";
-        "$terminal" = "kitty";
         "col.active_border" = lib.mkForce "rgba(${highlight}ff)";
         "col.inactive_border" = lib.mkForce "rgba(${lowlight}ff)";
         allow_tearing = false;
