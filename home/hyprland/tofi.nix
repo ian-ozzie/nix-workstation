@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -17,7 +16,7 @@ in
     programs.tofi.settings = {
       border-width = lib.mkForce 0;
       drun-launch = true;
-      font = lib.mkForce "${pkgs.dejavu_fonts}/share/fonts/truetype/DejaVuSansMono.ttf";
+      font = lib.mkForce config.ozzie.workstation.theme.nerd-font.ttf;
       hide-cursor = true;
       history = true;
       multi-instance = false;
