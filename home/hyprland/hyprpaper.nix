@@ -1,10 +1,17 @@
 {
-  pkgs,
+  config,
+  lib,
   ...
 }:
+let
+  cfg = config.ozzie.workstation.hyprpaper;
+in
 {
-  services.hyprpaper = {
-    enable = true;
-    package = with pkgs; hyprpaper;
+  config = lib.mkIf cfg.enable {
+    services.hyprpaper = {
+      settings = {
+        splash = false;
+      };
+    };
   };
 }
