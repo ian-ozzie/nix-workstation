@@ -240,7 +240,7 @@ in
         * {
           border-radius: 0px;
           border: none;
-          font-family: "DejaVuSansM Nerd Font";
+          font-family: "${config.ozzie.workstation.theme.nerd-font.name}";
           font-size: 16px;
         }
 
