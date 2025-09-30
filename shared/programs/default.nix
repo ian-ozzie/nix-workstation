@@ -1,5 +1,6 @@
 {
   imports = [
     ./nvf
+    ./starship.nix
   ];
 }
