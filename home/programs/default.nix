@@ -6,6 +6,7 @@
     ./hyprshot.nix
     ./kitty.nix
     ./librewolf.nix
+    ./pcmanfm.nix
     ./swappy.nix
     ./tofi.nix
     ./waybar.nix
