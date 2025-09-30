@@ -14,18 +14,18 @@ title=$(playerctl metadata title 2>/dev/null)
 
 if [[ $status == "Playing" ]]; then
   if [[ -z $artist ]]; then
-    echo 󰿎 $title
+    echo "󰿎 $title"
     exit
   fi
 
-  echo ♫ $artist - $title
+  echo "♫ $artist - $title"
   exit
 fi
 
 if [[ -z $artist ]]; then
-  echo $title
+  echo "$title"
   exit
 fi
 
-echo $artist - $title
+echo "$artist - $title"
 exit
