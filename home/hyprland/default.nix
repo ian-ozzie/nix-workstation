@@ -33,6 +33,7 @@
     hypridle.enable = lib.mkDefault true;
     hyprlock.enable = lib.mkDefault true;
     hyprpaper.enable = lib.mkDefault true;
+    hyprpicker.enable = lib.mkDefault true;
     tofi.enable = lib.mkDefault true;
     waybar.enable = lib.mkDefault true;
   };
