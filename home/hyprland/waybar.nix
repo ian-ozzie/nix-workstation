@@ -12,16 +12,23 @@ let
     lowlight
     ;
 
+  yubikey-waiting = lib.getExe (
+    pkgs.writeShellApplication {
+      name = "yubikey-waiting";
+      text = builtins.readFile ./scripts/waybar-yubikey-waiting.sh;
+
+      runtimeInputs = with pkgs; [
+        jq
+        netcat
+      ];
+    }
+  );
+
   cfg = config.ozzie.workstation.waybar;
 in
 {
   config = lib.mkIf cfg.enable {
     stylix.targets.waybar.enable = false;
-
-    home.file.".config/waybar/yubikey-waiting.sh" = {
-      executable = true;
-      text = builtins.readFile ./scripts/waybar-yubikey-waiting.sh;
-    };
 
     programs.waybar = {
       settings = [
@@ -98,7 +105,7 @@ in
           };
 
           "custom/yubikey" = {
-            exec = "$XDG_CONFIG_HOME/waybar/yubikey-waiting.sh";
+            exec = yubikey-waiting;
             return-type = "json";
           };
 
