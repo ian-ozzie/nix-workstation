@@ -7,6 +7,7 @@
 let
   inherit (config.ozzie.workstation)
     swaync
+    wlogout
     ;
 
   inherit (config.ozzie.workstation.theme.colours)
@@ -54,7 +55,6 @@ in
           position = "top";
 
           modules-left = [
-            "custom/logout"
             "hyprland/workspaces"
             "idle_inhibitor"
             "custom/yubikey"
@@ -71,7 +71,8 @@ in
             "battery"
             "clock"
           ]
-          ++ lib.optional swaync.enable "custom/swaync";
+          ++ lib.optional swaync.enable "custom/swaync"
+          ++ lib.optional wlogout.enable "custom/wlogout";
 
           battery = {
             format = "{icon}  {capacity}%";
@@ -116,12 +117,6 @@ in
             };
           };
 
-          "custom/logout" = {
-            format = "󰗽";
-            on-click = "wlogout -b 4";
-            tooltip = false;
-          };
-
           "custom/swaync" = lib.mkIf swaync.enable {
             escape = true;
             exec = "swaync-client -swb";
@@ -139,6 +134,12 @@ in
               "none" = "";
               "notification" = "";
             };
+          };
+
+          "custom/wlogout" = lib.mkIf wlogout.enable {
+            format = "󰗽";
+            on-click = "wlogout -b 2";
+            tooltip = false;
           };
 
           "custom/yubikey" = {
@@ -333,17 +334,6 @@ in
           animation: pulse-alert 5s infinite;
         }
 
-        window #custom-logout {
-          background-color: @base;
-          border-bottom: 2px solid @accent;
-          transition: background 0.2s ease-in-out;
-        }
-
-        window #custom-logout:hover {
-          background-color: @highlight;
-          border-bottom: 2px solid @accent;
-        }
-
         window #custom-swaync {
           background-color: @base;
           border-bottom: 2px solid @accent;
@@ -352,6 +342,18 @@ in
         }
 
         window #custom-swaync:hover {
+          background-color: @highlight;
+          border-bottom: 2px solid @accent;
+        }
+
+        window #custom-wlogout {
+          background-color: @base;
+          border-bottom: 2px solid @accent;
+          padding-right: 10px;
+          transition: background 0.2s ease-in-out;
+        }
+
+        window #custom-wlogout:hover {
           background-color: @highlight;
           border-bottom: 2px solid @accent;
         }
