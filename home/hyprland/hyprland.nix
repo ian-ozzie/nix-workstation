@@ -60,7 +60,6 @@ in
 
       bind = [
         "$mainMod, W, exec, $browser"
-        "$mainMod, R, exec, $menu"
         "$mainMod, L, exec, hyprlock --immediate"
 
         "ALT, F4, killactive"
@@ -201,7 +200,6 @@ in
       general = {
         "$browser" = "firefox";
         "$mainMod" = "SUPER";
-        "$menu" = "tofi-drun --width 640 --height 360";
         "col.active_border" = lib.mkForce "rgba(${highlight}ff)";
         "col.inactive_border" = lib.mkForce "rgba(${lowlight}ff)";
         allow_tearing = false;
