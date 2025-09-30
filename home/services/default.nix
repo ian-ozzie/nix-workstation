@@ -4,5 +4,6 @@
     ./hypridle.nix
     ./hyprpaper.nix
     ./hyprpolkitagent.nix
+    ./hyprsunset.nix
   ];
 }
