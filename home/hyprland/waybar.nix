@@ -12,6 +12,18 @@ let
     lowlight
     ;
 
+  pactl-next-sink = lib.getExe (
+    pkgs.writeShellApplication {
+      name = "pactl-next-sink";
+      text = builtins.readFile ./scripts/waybar-pactl-next-sink.sh;
+
+      runtimeInputs = with pkgs; [
+        jq
+        pulseaudio
+      ];
+    }
+  );
+
   yubikey-waiting = lib.getExe (
     pkgs.writeShellApplication {
       name = "yubikey-waiting";
@@ -199,6 +211,7 @@ in
             format-bluetooth = "{icon}  {volume}%";
             format-muted = "";
             on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+            on-click-right = pactl-next-sink;
             scroll-step = 1;
             tooltip = true;
 
