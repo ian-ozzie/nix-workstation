@@ -45,5 +45,6 @@
     swaync.enable = lib.mkDefault true;
     tofi.enable = lib.mkDefault true;
     waybar.enable = lib.mkDefault true;
+    wlogout.enable = lib.mkDefault false;
   };
 }

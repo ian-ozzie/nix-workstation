@@ -10,5 +10,6 @@
     ./swappy.nix
     ./tofi.nix
     ./waybar.nix
+    ./wlogout.nix
   ];
 }
