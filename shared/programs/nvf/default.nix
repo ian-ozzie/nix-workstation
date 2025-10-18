@@ -16,6 +16,7 @@ in
     ./binds.nix
     ./misc.nix
     ./options.nix
+    ./theme.nix
 
     ./plugins
   ];
@@ -29,13 +30,6 @@ in
         clipboard.enable = lib.mkDefault cfg.clipboard;
         viAlias = lib.mkDefault true;
         vimAlias = lib.mkDefault true;
-
-        theme = {
-          enable = true;
-          name = lib.mkForce "catppuccin";
-          style = lib.mkForce "mocha";
-          transparent = lib.mkForce false;
-        };
       };
     };
   };
