@@ -7,6 +7,7 @@
     ./kitty.nix
     ./librewolf.nix
     ./pcmanfm.nix
+    ./satty.nix
     ./swappy.nix
     ./tofi.nix
     ./waybar.nix
