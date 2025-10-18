@@ -30,13 +30,16 @@ in
     stylix.targets.hyprlock.enable = false;
 
     programs.hyprlock = {
-      settings = {
-        background = {
-          blur_passes = 2;
-          color = "rgb(${lowlight})";
-          path = lib.mkDefault config.stylix.image;
-        };
+      extraConfig = ''
+        background {
+          blur_passes = 3
+          brightness = 0.8
+          color = "rgb(${lowlight})"
+          path = ${config.stylix.image}
+        }
+      '';
 
+      settings = {
         general = {
           grace = 5;
           hide_cursor = true;

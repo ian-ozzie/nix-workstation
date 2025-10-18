@@ -11,7 +11,7 @@ in
   stylix = {
     base16Scheme = lib.mkDefault theme.base16.scheme;
     enable = lib.mkDefault true;
-    image = lib.mkDefault ./wallpaper.png;
+    image = lib.mkDefault theme.wallpaper.png;
     polarity = lib.mkDefault theme.polarity;
 
     cursor = {
