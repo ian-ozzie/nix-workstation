@@ -18,6 +18,7 @@
     ./hyprsunset.nix
     ./kitty.nix
     ./pcmanfm.nix
+    ./satty.nix
     ./swappy.nix
     ./swaync.nix
     ./tofi.nix
@@ -41,7 +42,8 @@
     kitty.enable = lib.mkDefault true;
     pcmanfm.enable = lib.mkDefault true;
     starship.enable = lib.mkDefault true;
-    swappy.enable = lib.mkDefault true;
+    satty.enable = lib.mkDefault true;
+    swappy.enable = lib.mkDefault false;
     swaync.enable = lib.mkDefault true;
     tofi.enable = lib.mkDefault true;
     waybar.enable = lib.mkDefault true;
