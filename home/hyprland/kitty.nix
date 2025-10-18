@@ -4,7 +4,7 @@
   ...
 }:
 let
-  inherit (config.lib.stylix) colors;
+  inherit (config.ozzie.workstation) preset;
   inherit (config.ozzie.workstation.theme.colours)
     accent
     alert
@@ -113,7 +113,6 @@ in
         clear_all_shortcuts = lib.mkIf cfg.binds true;
         cursor = accent;
         cursor_text_color = lowlight;
-        foreground = "#${colors.base05}";
         inactive_border_color = accent;
         inactive_tab_background = lowlight;
         inactive_tab_font_style = "normal";
@@ -137,38 +136,6 @@ in
         wayland_titlebar_color = lowlight;
         window_border_width = "2px";
         window_padding_width = 4;
-
-        # black
-        color0 = "#${colors.base00}";
-        color8 = "#${colors.base02}";
-
-        # red
-        color1 = "#${colors.base08}";
-        color9 = "#${colors.base08}";
-
-        # green
-        color2 = "#${colors.base0B}";
-        color10 = "#${colors.base0B}";
-
-        # yellow
-        color3 = "#${colors.base0A}";
-        color11 = "#${colors.base0A}";
-
-        # blue
-        color4 = "#${colors.base0D}";
-        color12 = "#${colors.base0D}";
-
-        # magenta
-        color5 = "#${colors.base0E}";
-        color13 = "#${colors.base0E}";
-
-        # cyan
-        color6 = "#${colors.base0C}";
-        color14 = "#${colors.base0C}";
-
-        # white
-        color7 = "#${colors.base05}";
-        color15 = "#${colors.base06}";
       };
     };
 
