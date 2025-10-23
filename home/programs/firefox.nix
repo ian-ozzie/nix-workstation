@@ -144,6 +144,12 @@ in
               name = "NixOS Wiki";
               urls = [ { template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; } ];
             };
+            noogle = {
+              definedAliases = [ "noogle" ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              name = "Noogle";
+              urls = [ { template = "https://noogle.dev/q?term={searchTerms}"; } ];
+            };
           };
         };
 
