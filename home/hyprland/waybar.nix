@@ -6,6 +6,7 @@
 }:
 let
   inherit (config.ozzie.workstation)
+    hyprsunset
     swaync
     wlogout
     ;
@@ -17,6 +18,18 @@ let
     highlight
     lowlight
     ;
+
+  hyprsunset-state = lib.getExe (
+    pkgs.writeShellApplication {
+      name = "waybar-hyprsunset-state.sh";
+      text = builtins.readFile ./scripts/waybar-hyprsunset-state.sh;
+
+      runtimeInputs = with pkgs; [
+        jq
+        netcat
+      ];
+    }
+  );
 
   pactl-next-sink = lib.getExe (
     pkgs.writeShellApplication {
@@ -54,7 +67,7 @@ in
           layer = "top";
           position = "top";
 
-          modules-left = [
+          modules-left = lib.optional hyprsunset.enable "custom/hyprsunset" ++ [
             "hyprland/workspaces"
             "idle_inhibitor"
             "custom/yubikey"
@@ -115,6 +128,14 @@ in
               warning = 70;
               critical = 90;
             };
+          };
+
+          "custom/hyprsunset" = lib.mkIf hyprsunset.enable {
+            exec = hyprsunset-state;
+            on-click = "systemctl --user is-active hyprsunset.service && systemctl --user stop hyprsunset.service || systemctl --user start hyprsunset.service";
+            on-scroll-up = "hyprctl hyprsunset gamma +10";
+            on-scroll-down = "hyprctl hyprsunset gamma -10";
+            return-type = "json";
           };
 
           "custom/swaync" = lib.mkIf swaync.enable {
@@ -332,6 +353,26 @@ in
 
         window #battery.critical.discharging {
           animation: pulse-alert 5s infinite;
+        }
+
+        window #custom-hyprsunset {
+          background-color: @base;
+          border-bottom: 2px solid @accent;
+          padding-right: 11px;
+          transition: background 0.2s ease-in-out;
+        }
+
+        window #custom-hyprsunset:hover {
+          background-color: @alert;
+          border-bottom: 2px solid @accent;
+        }
+
+        window #custom-hyprsunset.error {
+          color: @alert;
+        }
+
+        window #custom-hyprsunset.error:hover {
+          color: @accent;
         }
 
         window #custom-swaync {
