@@ -9,6 +9,7 @@ let
 
   accent = lib.strings.removePrefix "#" colours.accent;
   alert = lib.strings.removePrefix "#" colours.alert;
+  base = lib.strings.removePrefix "#" colours.base;
   highlight = lib.strings.removePrefix "#" colours.highlight;
   lowlight = lib.strings.removePrefix "#" colours.lowlight;
 
@@ -34,7 +35,7 @@ in
         background {
           blur_passes = 3
           brightness = 0.8
-          color = "rgb(${lowlight})"
+          color = "rgb(${base})"
           path = ${config.stylix.image}
         }
       '';
@@ -86,8 +87,14 @@ in
       };
     };
 
-    wayland.windowManager.hyprland.settings.bind = [
-      "$mainMod, L, exec, hyprlock --immediate"
-    ];
+    wayland.windowManager.hyprland.settings = {
+      bind = [
+        "$mainMod, L, exec, hyprlock --immediate"
+      ];
+
+      bindl = [
+        "$mainMod SHIFT, L, exec, pkill hyprlock; hyprctl --instance 0 'keyword misc:allow_session_lock_restore 1'; hyprctl --instance 0 'dispatch exec hyprlock'"
+      ];
+    };
   };
 }
