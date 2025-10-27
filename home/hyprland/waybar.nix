@@ -20,18 +20,6 @@ let
     lowlight
     ;
 
-  hyprsunset-state = lib.getExe (
-    pkgs.writeShellApplication {
-      name = "waybar-hyprsunset-state.sh";
-      text = builtins.readFile ./scripts/waybar-hyprsunset-state.sh;
-
-      runtimeInputs = with pkgs; [
-        jq
-        netcat
-      ];
-    }
-  );
-
   pactl-next-sink = lib.getExe (
     pkgs.writeShellApplication {
       name = "pactl-next-sink";
@@ -124,11 +112,22 @@ in
           };
 
           "custom/hyprsunset" = lib.mkIf hyprsunset.enable {
-            exec = hyprsunset-state;
             on-click = "systemctl --user is-active hyprsunset.service && systemctl --user stop hyprsunset.service || systemctl --user start hyprsunset.service";
             on-scroll-up = "hyprctl hyprsunset gamma +10";
             on-scroll-down = "hyprctl hyprsunset gamma -10";
             return-type = "json";
+
+            exec = lib.getExe (
+              pkgs.writeShellApplication {
+                name = "waybar-hyprsunset-state.sh";
+                text = builtins.readFile ./scripts/waybar-hyprsunset-state.sh;
+
+                runtimeInputs = with pkgs; [
+                  jq
+                  netcat
+                ];
+              }
+            );
           };
 
           "custom/swaync" = lib.mkIf swaync.enable {
