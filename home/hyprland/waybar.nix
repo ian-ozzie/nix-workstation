@@ -389,6 +389,14 @@ in
           border-bottom: 2px solid @accent;
         }
 
+        window #custom-swaync.dnd-none, window #custom-swaync.dnd-notification {
+          color: @alert;
+        }
+
+        window #custom-swaync.dnd-none:hover, window #custom-swaync.dnd-notification:hover {
+          color: @accent;
+        }
+
         window #custom-wlogout {
           background-color: @base;
           border-bottom: 2px solid @accent;
