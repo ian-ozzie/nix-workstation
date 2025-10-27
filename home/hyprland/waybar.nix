@@ -20,18 +20,6 @@ let
     lowlight
     ;
 
-  pactl-next-sink = lib.getExe (
-    pkgs.writeShellApplication {
-      name = "pactl-next-sink";
-      text = builtins.readFile ./scripts/waybar-pactl-next-sink.sh;
-
-      runtimeInputs = with pkgs; [
-        jq
-        pulseaudio
-      ];
-    }
-  );
-
   cfg = config.ozzie.workstation.waybar;
 in
 {
@@ -261,7 +249,6 @@ in
             format-bluetooth = "{icon}  {volume}%";
             format-muted = "";
             on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-            on-click-right = pactl-next-sink;
             scroll-step = 1;
             tooltip = true;
 
@@ -273,6 +260,18 @@ in
                 " "
               ];
             };
+
+            on-click-right = lib.getExe (
+              pkgs.writeShellApplication {
+                name = "pactl-next-sink";
+                text = builtins.readFile ./scripts/waybar-pactl-next-sink.sh;
+
+                runtimeInputs = with pkgs; [
+                  jq
+                  pulseaudio
+                ];
+              }
+            );
           };
 
           temperature = {
