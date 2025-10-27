@@ -9,6 +9,7 @@ let
     hyprsunset
     swaync
     wlogout
+    yubikey-touch-detector
     ;
 
   inherit (config.ozzie.workstation.theme.colours)
@@ -43,18 +44,6 @@ let
     }
   );
 
-  yubikey-waiting = lib.getExe (
-    pkgs.writeShellApplication {
-      name = "yubikey-waiting";
-      text = builtins.readFile ./scripts/waybar-yubikey-waiting.sh;
-
-      runtimeInputs = with pkgs; [
-        jq
-        netcat
-      ];
-    }
-  );
-
   cfg = config.ozzie.workstation.waybar;
 in
 {
@@ -67,12 +56,16 @@ in
           layer = "top";
           position = "top";
 
-          modules-left = lib.optional hyprsunset.enable "custom/hyprsunset" ++ [
-            "idle_inhibitor"
-            "custom/yubikey"
-            "hyprland/workspaces"
-            "hyprland/window"
-          ];
+          modules-left =
+            lib.optional hyprsunset.enable "custom/hyprsunset"
+            ++ [
+              "idle_inhibitor"
+            ]
+            ++ lib.optional yubikey-touch-detector.enable "custom/yubikey"
+            ++ [
+              "hyprland/workspaces"
+              "hyprland/window"
+            ];
 
           modules-right = [
             "tray"
@@ -163,9 +156,20 @@ in
             tooltip = false;
           };
 
-          "custom/yubikey" = {
-            exec = yubikey-waiting;
+          "custom/yubikey" = lib.mkIf yubikey-touch-detector.enable {
             return-type = "json";
+
+            exec = lib.getExe (
+              pkgs.writeShellApplication {
+                name = "yubikey-waiting";
+                text = builtins.readFile ./scripts/waybar-yubikey-waiting.sh;
+
+                runtimeInputs = with pkgs; [
+                  jq
+                  netcat
+                ];
+              }
+            );
           };
 
           "hyprland/window" = {
@@ -466,24 +470,6 @@ in
           animation: pulse-alert 5s infinite;
         }
       '';
-    };
-
-    systemd.user = {
-      services.yubikey-touch-detector = {
-        Service.ExecStart = lib.getExe pkgs.yubikey-touch-detector;
-        Unit.Description = "Yubikey Touch Detector daemon";
-      };
-
-      sockets.yubikey-touch-detector = {
-        Install.WantedBy = [ "sockets.target" ];
-        Unit.Description = "Yubikey Touch Detector daemon";
-
-        Socket = {
-          Accept = false;
-          ListenStream = "%t/yubikey-touch-detector.socket";
-          SocketMode = "0600";
-        };
-      };
     };
 
     wayland.windowManager.hyprland.settings = {
