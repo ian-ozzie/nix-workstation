@@ -6,5 +6,6 @@
     ./hyprpolkitagent.nix
     ./hyprsunset.nix
     ./swaync.nix
+    ./yubikey-touch-detector.nix
   ];
 }
