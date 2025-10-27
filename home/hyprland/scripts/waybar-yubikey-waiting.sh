@@ -4,7 +4,8 @@ SOCKET="${XDG_RUNTIME_DIR:-/run/user/$UID}/yubikey-touch-detector.socket"
 INTERVAL=5
 
 send () {
-  jq -cn --arg text "$1" --arg class "$2" --arg tooltip "$3" '{ text: $text, tooltip: $tooltip, class: $class }'
+  jq -cn --arg text "$1" --arg class "$2" --arg tooltip "$3" \
+    '{ text: $text, class: $class, tooltip: $tooltip }'
 }
 
 while true; do
