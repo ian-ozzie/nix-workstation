@@ -68,9 +68,9 @@ in
           position = "top";
 
           modules-left = lib.optional hyprsunset.enable "custom/hyprsunset" ++ [
-            "hyprland/workspaces"
             "idle_inhibitor"
             "custom/yubikey"
+            "hyprland/workspaces"
             "hyprland/window"
           ];
 
@@ -421,7 +421,11 @@ in
         }
 
         window #idle_inhibitor.activated {
-          background-color: @alert;
+          color: @alert;
+        }
+
+        window #idle_inhibitor.activated:hover {
+          color: @accent;
         }
 
         window #workspaces {
