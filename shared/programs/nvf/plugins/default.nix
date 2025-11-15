@@ -87,6 +87,18 @@ in
         todo-comments.enable = true;
       };
 
+      terminal = {
+        toggleterm = {
+          enable = true;
+          mappings.open = "<leader>tt";
+
+          lazygit = {
+            enable = true;
+            mappings.open = "<leader>tg";
+          };
+        };
+      };
+
       ui = {
         illuminate.enable = true;
 
