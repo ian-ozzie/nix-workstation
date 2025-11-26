@@ -4,6 +4,7 @@
   ...
 }:
 let
+  inherit (config.ozzie.workstation) hyprland;
   inherit (config.ozzie.workstation.theme.colours)
     accent
     alert
@@ -418,12 +419,14 @@ in
       '';
     };
 
-    wayland.windowManager.hyprland.settings = {
-      bind = [
-        "$mainMod, N, exec, swaync-client -t -sw"
-        "$mainMod SHIFT, N, exec, pkill swaync || swaync"
-        "$mainMod CTRL SHIFT, N, exec, pkill swaync || GTK_DEBUG=interactive swaync"
-      ];
+    wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
+      settings = lib.mkIf hyprland.binds {
+        bind = [
+          "$mainMod, N, exec, swaync-client -t -sw"
+        ]
+        ++ lib.optional (!hyprland.tinker) "$mainMod $shiftMod, N, exec, pkill swaync || swaync"
+        ++ lib.optional hyprland.tinker "$mainMod $shiftMod $ctrlMod, N, exec, pkill swaync || GTK_DEBUG=interactive swaync";
+      };
     };
   };
 }

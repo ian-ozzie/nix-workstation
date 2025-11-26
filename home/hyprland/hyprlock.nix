@@ -5,6 +5,7 @@
   ...
 }:
 let
+  inherit (config.ozzie.workstation) hyprland;
   inherit (config.ozzie.workstation.theme) colours;
 
   accent = lib.strings.removePrefix "#" colours.accent;
@@ -87,14 +88,16 @@ in
       };
     };
 
-    wayland.windowManager.hyprland.settings = {
-      bind = [
-        "$mainMod, L, exec, hyprlock --immediate"
-      ];
+    wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
+      settings = lib.mkIf hyprland.binds {
+        bind = [
+          "$mainMod, L, exec, hyprlock --immediate"
+        ];
 
-      bindl = [
-        "$mainMod SHIFT, L, exec, pkill hyprlock; hyprctl --instance 0 'keyword misc:allow_session_lock_restore 1'; hyprctl --instance 0 'dispatch exec hyprlock'"
-      ];
+        bindl = [
+          "$mainMod $shiftMod, L, exec, pkill hyprlock; hyprctl --instance 0 'keyword misc:allow_session_lock_restore 1'; hyprctl --instance 0 'dispatch exec hyprlock'"
+        ];
+      };
     };
   };
 }

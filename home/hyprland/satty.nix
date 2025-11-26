@@ -4,6 +4,8 @@
   ...
 }:
 let
+  inherit (config.ozzie.workstation) hyprland;
+
   cfg = config.ozzie.workstation.satty;
 in
 {
@@ -62,10 +64,14 @@ in
       '';
     };
 
-    wayland.windowManager.hyprland.settings.bind = [
-      "ALT SHIFT, 2, exec, hyprshot -z -m output -r stdout | satty --filename -"
-      "ALT SHIFT, 3, exec, hyprshot -z -m window -r stdout | satty --filename -"
-      "ALT SHIFT, 4, exec, hyprshot -z -m region -r stdout | satty --filename -"
-    ];
+    wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
+      settings = lib.mkIf hyprland.binds {
+        bind = [
+          "$altMod $shiftMod, 2, exec, hyprshot -z -m output -r stdout | satty --filename -"
+          "$altMod $shiftMod, 3, exec, hyprshot -z -m window -r stdout | satty --filename -"
+          "$altMod $shiftMod, 4, exec, hyprshot -z -m region -r stdout | satty --filename -"
+        ];
+      };
+    };
   };
 }
