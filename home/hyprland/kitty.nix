@@ -4,7 +4,7 @@
   ...
 }:
 let
-  inherit (config.ozzie.workstation) preset;
+  inherit (config.ozzie.workstation) hyprland preset;
   inherit (config.ozzie.workstation.theme.colours)
     accent
     alert
@@ -63,8 +63,12 @@ in
       };
     };
 
-    wayland.windowManager.hyprland.settings.bind = [
-      "$mainMod, Q, exec, kitty"
-    ];
+    wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
+      settings = lib.mkIf hyprland.binds {
+        bind = [
+          "$mainMod, Q, exec, kitty"
+        ];
+      };
+    };
   };
 }

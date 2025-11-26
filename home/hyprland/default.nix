@@ -33,6 +33,8 @@
 
   ozzie.workstation = {
     hypridle.enable = lib.mkDefault true;
+    hyprland.binds = lib.mkDefault true;
+    hyprland.enable = lib.mkDefault true;
     hyprlock.enable = lib.mkDefault true;
     hyprpaper.enable = lib.mkDefault true;
     hyprpicker.enable = lib.mkDefault true;
