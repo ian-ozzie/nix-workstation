@@ -5,6 +5,7 @@
 
     ./programs
     ./services
+    ./wm
     ./workstation
   ];
 }

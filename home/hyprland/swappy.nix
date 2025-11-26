@@ -4,6 +4,7 @@
   ...
 }:
 let
+  inherit (config.ozzie.workstation) hyprland;
   inherit (config.ozzie.workstation.theme.colours) accent;
 
   cfg = config.ozzie.workstation.swappy;
@@ -26,10 +27,14 @@ in
       text_size = 18;
     };
 
-    wayland.windowManager.hyprland.settings.bind = [
-      "ALT SHIFT, 2, exec, hyprshot -z -m output -r stdout | swappy -f -"
-      "ALT SHIFT, 3, exec, hyprshot -z -m window -r stdout | swappy -f -"
-      "ALT SHIFT, 4, exec, hyprshot -z -m region -r stdout | swappy -f -"
-    ];
+    wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
+      settings = lib.mkIf hyprland.binds {
+        bind = [
+          "$altMod $shiftMod, 2, exec, hyprshot -z -m output -r stdout | satty --filename -"
+          "$altMod $shiftMod, 3, exec, hyprshot -z -m window -r stdout | satty --filename -"
+          "$altMod $shiftMod, 4, exec, hyprshot -z -m region -r stdout | satty --filename -"
+        ];
+      };
+    };
   };
 }

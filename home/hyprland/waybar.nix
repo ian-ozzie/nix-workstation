@@ -6,6 +6,7 @@
 }:
 let
   inherit (config.ozzie.workstation)
+    hyprland
     hyprsunset
     swaync
     wlogout
@@ -124,7 +125,6 @@ in
             exec-if = "which swaync-client";
             format = "{icon}";
             on-click = "swaync-client -t -sw";
-            on-click-middle = "pkill swaync || swaync";
             on-click-right = "swaync-client -d -sw";
             return-type = "json";
             tooltip = false;
@@ -478,13 +478,16 @@ in
       '';
     };
 
-    wayland.windowManager.hyprland.settings = {
-      exec-once = [ "waybar" ];
+    wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
+      settings = {
+        exec-once = [ "waybar" ];
 
-      bind = [
-        "$mainMod SHIFT, B, exec, pkill waybar || waybar"
-        "$mainMod CTRL SHIFT, B, exec, pkill waybar || GTK_DEBUG=interactive waybar"
-      ];
+        bind = lib.mkIf hyprland.binds ([
+          "$mainMod, B, exec, pgrep waybar || waybar"
+        ]
+        ++ lib.optional (!hyprland.tinker) "$mainMod $shiftMod, B, exec, pkill waybar || waybar"
+        ++ lib.optional hyprland.tinker "$mainMod $shiftMod, B, exec, pkill waybar || GTK_DEBUG=interactive waybar");
+      };
     };
   };
 }
