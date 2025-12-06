@@ -3,6 +3,7 @@
     ../shared
     ../workstation
 
+    ./boot
     ./programs
     ./services
   ];
