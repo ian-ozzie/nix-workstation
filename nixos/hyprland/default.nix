@@ -16,5 +16,9 @@
       enable = lib.mkDefault true;
       command = lib.mkDefault "Hyprland";
     };
+
+    plymouth = {
+      enable = lib.mkDefault true;
+    };
   };
 }
