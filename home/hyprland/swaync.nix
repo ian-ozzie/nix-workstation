@@ -255,7 +255,6 @@ in
           color: @accent;
           margin: 8px;
           padding: 8px 12px 8px 8px;
-          text-align: center;
         }
 
         .control-center .widget-title button:hover {
