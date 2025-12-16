@@ -48,13 +48,11 @@ in
         memory_usage.symbol = "󰍛 ";
         meson.symbol = "󰔷 ";
         nim.symbol = "󰆥 ";
-        package.symbol = "󰏗 ";
         perl.symbol = " ";
         pijul_channel.symbol = " ";
         python.symbol = " ";
         rlang.symbol = "󰟔 ";
         ruby.symbol = " ";
-        rust.symbol = "󱘗 ";
         scala.symbol = " ";
         swift.symbol = " ";
         zig.symbol = " ";
@@ -111,8 +109,11 @@ in
         };
 
         nix_shell = {
-          format = " \\[[$symbol$state(\\($name\\))]($style)\\]";
+          format = " \\[[$symbol(($name)$state)]($style)\\]";
+          impure_msg = "*";
+          pure_msg = "";
           symbol = " ";
+          unknown_msg = "?";
         };
 
         nodejs = {
@@ -120,9 +121,19 @@ in
           symbol = " ";
         };
 
+        package = {
+          format = " \\[[$symbol($version)]($style)\\]";
+          symbol = "󰏗 ";
+        };
+
         php = {
           format = " \\[[$symbol($version)]($style)\\]";
           symbol = " ";
+        };
+
+        rust = {
+          format = " \\[[$symbol($version)]($style)\\]";
+          symbol = "󱘗 ";
         };
 
         status = {
