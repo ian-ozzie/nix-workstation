@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -42,25 +41,7 @@ in
         enableExtraDiagnostics = true;
         enableFormat = false;
         enableTreesitter = true;
-        php.enable = true;
-        tailwind.enable = true;
-        ts.enable = true;
-
-        nix = {
-          enable = true;
-          extraDiagnostics.enable = true;
-          treesitter.enable = true;
-
-          lsp = {
-            package = pkgs.nixd;
-            server = "nixd";
-
-            options = {
-              formatting.command = [ "nixfmt" ];
-              nixpkgs.expr = "import <nixpkgs> { }";
-            };
-          };
-        };
+        markdown.enable = true;
       };
 
       lsp = {

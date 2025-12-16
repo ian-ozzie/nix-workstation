@@ -10,6 +10,13 @@ in
   options.ozzie.workstation.nvf = {
     enable = lib.mkEnableOption "opinionated nvf config";
     clipboard = lib.mkEnableOption "opinionated nvf clipboard handling";
+
+    languages = {
+      nix.enable = lib.mkEnableOption "opinionated nix config";
+      php.enable = lib.mkEnableOption "opinionated php config";
+      rust.enable = lib.mkEnableOption "opinionated rust config";
+      ts.enable = lib.mkEnableOption "opinionated ts config";
+    };
   };
 
   imports = [
@@ -18,6 +25,7 @@ in
     ./options.nix
     ./theme.nix
 
+    ./languages
     ./plugins
   ];
 
