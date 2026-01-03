@@ -8,14 +8,24 @@ let
 in
 {
   options.ozzie.workstation.nvf = {
-    enable = lib.mkEnableOption "opinionated nvf config";
     clipboard = lib.mkEnableOption "opinionated nvf clipboard handling";
+    enable = lib.mkEnableOption "opinionated nvf config";
 
     languages = {
+      enable = lib.mkEnableOption "opinionated nix config";
       nix.enable = lib.mkEnableOption "opinionated nix config";
       php.enable = lib.mkEnableOption "opinionated php config";
       rust.enable = lib.mkEnableOption "opinionated rust config";
       ts.enable = lib.mkEnableOption "opinionated ts config";
+    };
+
+    plugins = {
+      git.enable = lib.mkEnableOption "opinionated git plugins config";
+      notes.enable = lib.mkEnableOption "opinionated notes plugins config";
+      terminal.enable = lib.mkEnableOption "opinionated terminal plugins config";
+      ui.enable = lib.mkEnableOption "opinionated ui plugins config";
+      utility.enable = lib.mkEnableOption "opinionated utility plugins config";
+      visuals.enable = lib.mkEnableOption "opinionated visuals plugins config";
     };
   };
 
