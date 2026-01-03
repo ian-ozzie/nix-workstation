@@ -16,10 +16,8 @@ in
       };
 
       lsp.servers = {
-        nixd = {
-          enable = true;
-          #settings.nil.nix.flake.autoArchive = true;
-        };
+        nil.enable = lib.mkForce false;
+        nixd.enable = true;
       };
     };
   };
