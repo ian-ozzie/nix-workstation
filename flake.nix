@@ -20,24 +20,50 @@
     };
   };
 
-  outputs = _: {
-    lib = import ./lib;
+  outputs =
+    {
+      nixpkgs,
+      ...
+    }:
+    let
+      systems = [ "x86_64-linux" ];
+    in
+    {
+      devShells = nixpkgs.lib.genAttrs systems (
+        system:
+        let
+          inherit (nixpkgs.legacyPackages.${system}) mkShell;
 
-    nixosModules = {
-      default = import ./nixos;
+          pkgs = import nixpkgs {
+            inherit system;
+          };
+        in
+        {
+          default = mkShell {
+            packages = with pkgs; [
+              nixd
+            ];
+          };
+        }
+      );
 
-      gnome = import ./nixos/gnome;
-      hyprland = import ./nixos/hyprland;
+      lib = import ./lib;
 
-      nvf = import ./nixos/nvf.nix;
+      nixosModules = {
+        default = import ./nixos;
+
+        gnome = import ./nixos/gnome;
+        hyprland = import ./nixos/hyprland;
+
+        nvf = import ./nixos/nvf.nix;
+      };
+
+      homeModules = {
+        default = import ./home;
+
+        hyprland = import ./home/hyprland;
+
+        nvf = import ./home/nvf.nix;
+      };
     };
-
-    homeModules = {
-      default = import ./home;
-
-      hyprland = import ./home/hyprland;
-
-      nvf = import ./home/nvf.nix;
-    };
-  };
 }
