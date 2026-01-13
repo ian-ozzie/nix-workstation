@@ -22,7 +22,6 @@ in
       package = with pkgs; starship;
 
       settings = {
-        aws.symbol = " ";
         buf.symbol = " ";
         c.symbol = " ";
         cmake.symbol = " ";
@@ -56,6 +55,11 @@ in
         scala.symbol = " ";
         swift.symbol = " ";
         zig.symbol = " ";
+
+        aws = {
+          format = " \\[[$symbol($profile )($region)( $duration)]($style)\\]";
+          symbol = " ";
+        };
 
         character = {
           error_symbol = "[❯](red bold)";
