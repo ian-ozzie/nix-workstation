@@ -11,6 +11,7 @@
   imports = [
     ./hypridle.nix
     ./hyprland.nix
+    ./hyprlauncher.nix
     ./hyprlock.nix
     ./hyprpaper.nix
     ./hyprpicker.nix
