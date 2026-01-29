@@ -42,6 +42,7 @@
     hyprpicker.enable = lib.mkDefault true;
     hyprpolkitagent.enable = lib.mkDefault true;
     hyprsunset.enable = lib.mkDefault true;
+    hyprtoolkit.enable = lib.mkDefault true;
     kitty.binds = lib.mkDefault true;
     kitty.enable = lib.mkDefault true;
     pcmanfm.enable = lib.mkDefault true;
