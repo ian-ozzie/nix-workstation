@@ -36,6 +36,7 @@
     hypridle.enable = lib.mkDefault true;
     hyprland.binds = lib.mkDefault true;
     hyprland.enable = lib.mkDefault true;
+    hyprlauncher.enable = lib.mkDefault true;
     hyprlock.enable = lib.mkDefault true;
     hyprpaper.enable = lib.mkDefault true;
     hyprpicker.enable = lib.mkDefault true;
@@ -48,7 +49,7 @@
     satty.enable = lib.mkDefault true;
     swappy.enable = lib.mkDefault false;
     swaync.enable = lib.mkDefault true;
-    tofi.enable = lib.mkDefault true;
+    tofi.enable = lib.mkDefault false;
     waybar.enable = lib.mkDefault true;
     wlogout.enable = lib.mkDefault false;
   };
