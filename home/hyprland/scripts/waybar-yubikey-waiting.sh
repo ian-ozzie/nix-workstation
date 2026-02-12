@@ -4,7 +4,12 @@ SOCKET="${XDG_RUNTIME_DIR:-/run/user/$UID}/yubikey-touch-detector.socket"
 INTERVAL=5
 
 send () {
-  jq -cn --arg text "$1" --arg class "$2" --arg tooltip "$3" \
+  # Defaults to blank, which hides the waybar widget
+  TEXT="${1:-}"
+  CLASS="${2:-}"
+  TOOLTIP="${3:-}"
+
+  jq -cn --arg text "$TEXT" --arg class "$CLASS" --arg tooltip "$TOOLTIP" \
     '{ text: $text, class: $class, tooltip: $tooltip }'
 }
 
