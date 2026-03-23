@@ -14,7 +14,7 @@
 
     greetd = {
       enable = lib.mkDefault true;
-      command = lib.mkDefault "Hyprland";
+      command = lib.mkDefault "start-hyprland";
     };
 
     plymouth = {
