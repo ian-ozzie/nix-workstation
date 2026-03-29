@@ -92,11 +92,11 @@ in
     wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
       settings = lib.mkIf hyprland.binds {
         bind = [
-          "${mainMod}, L, exec, hyprlock --immediate"
+          "${mainMod}, escape, exec, hyprlock --immediate"
         ];
 
         bindl = [
-          "${mainMod} ${shiftMod}, L, exec, pkill hyprlock; hyprctl --instance 0 'keyword misc:allow_session_lock_restore 1'; hyprctl --instance 0 'dispatch exec hyprlock'"
+          "${mainMod} ${shiftMod}, escape, exec, pkill hyprlock; hyprctl --instance 0 'keyword misc:allow_session_lock_restore 1'; hyprctl --instance 0 'dispatch exec hyprlock'"
         ];
       };
     };

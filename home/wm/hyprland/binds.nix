@@ -21,9 +21,17 @@ in
           "${mainMod}, F, togglefloating"
           "${mainMod} ${shiftMod}, F, fullscreen"
           "${mainMod}, P, pseudo"
-          "${mainMod}, J, layoutmsg, togglesplit"
-          "${mainMod}, code:34, cyclenext, prev" # code:34 = [
-          "${mainMod}, code:35, cyclenext" # code:35 = ]
+          "${mainMod}, code:34, layoutmsg, focus l" # code:34 = [
+          "${mainMod} ${shiftMod}, code:34, layoutmsg, swapcol l" # code:34 = [
+          "${mainMod}, code:35, layoutmsg, focus r" # code:35 = ]
+          "${mainMod} ${shiftMod}, code:35, layoutmsg, swapcol r" # code:35 = ]
+          "${mainMod}, code:51, layoutmsg, promote" # code:51 = \
+
+          # Move layout focus with mainMod + vim keys
+          "${mainMod}, H, layoutmsg, focus l"
+          "${mainMod}, L, layoutmsg, focus r"
+          "${mainMod}, K, layoutmsg, focus u"
+          "${mainMod}, J, layoutmsg, focus d"
 
           # Move focus with mainMod + arrow keys
           "${mainMod}, left, movefocus, l"
@@ -35,8 +43,10 @@ in
           "${mainMod}, mouse:274, exec, hyprctl keyword cursor:zoom_factor 1"
           "${mainMod}, mouse_down, exec, hyprctl getoption cursor:zoom_factor | grep float | awk '{ system(\"hyprctl keyword cursor:zoom_factor \" $2 * 1.1) }'"
           "${mainMod}, mouse_up, exec, hyprctl getoption cursor:zoom_factor | grep float | awk '{ if($2!=1) system(\"hyprctl keyword cursor:zoom_factor \" $2 * 0.9) }'"
-          "${mainMod}, equal, exec, hyprctl getoption cursor:zoom_factor | grep float | awk '{ system(\"hyprctl keyword cursor:zoom_factor \" $2 * 1.1) }'"
-          "${mainMod}, minus, exec, hyprctl getoption cursor:zoom_factor | grep float | awk '{ if($2!=1) system(\"hyprctl keyword cursor:zoom_factor \" $2 * 0.9) }'"
+
+          # Increase window size
+          "${mainMod}, equal, layoutmsg, colresize +conf"
+          "${mainMod}, minus, layoutmsg, colresize -conf"
 
           # Scratchpad workspace
           "${mainMod}, S, togglespecialworkspace, magic"
