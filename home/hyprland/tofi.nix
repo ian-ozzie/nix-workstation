@@ -5,6 +5,7 @@
 }:
 let
   inherit (config.ozzie.workstation) hyprland;
+  inherit (hyprland) mainMod;
   inherit (config.ozzie.workstation.theme) colours;
   inherit (colours)
     accent
@@ -50,7 +51,7 @@ in
     wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
       settings = lib.mkIf hyprland.binds {
         bind = [
-          "$mainMod, R, exec, tofi-drun --width 640 --height 360"
+          "${mainMod}, R, exec, tofi-drun --width 640 --height 360"
         ];
       };
     };

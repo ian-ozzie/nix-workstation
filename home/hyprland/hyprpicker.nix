@@ -5,6 +5,7 @@
 }:
 let
   inherit (config.ozzie.workstation) hyprland;
+  inherit (hyprland) altMod ctrlMod shiftMod;
 
   cfg = config.ozzie.workstation.hyprpicker;
 in
@@ -13,8 +14,8 @@ in
     wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
       settings = lib.mkIf hyprland.binds {
         bind = [
-          "$altMod $shiftMod, 1, exec, hyprpicker -alf hex"
-          "$altMod $shiftMod $ctrlMod, 1, exec, hyprpicker -alf rgb"
+          "${altMod} ${shiftMod}, 1, exec, hyprpicker -alf hex"
+          "${altMod} ${shiftMod} ${ctrlMod}, 1, exec, hyprpicker -alf rgb"
         ];
       };
     };

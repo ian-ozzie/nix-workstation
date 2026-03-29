@@ -5,6 +5,7 @@
 }:
 let
   inherit (config.ozzie.workstation) hyprland;
+  inherit (hyprland) altMod shiftMod;
   inherit (config.ozzie.workstation.theme.colours) accent;
 
   cfg = config.ozzie.workstation.swappy;
@@ -30,9 +31,9 @@ in
     wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
       settings = lib.mkIf hyprland.binds {
         bind = [
-          "$altMod $shiftMod, 2, exec, hyprshot -z -m output -r stdout | satty --filename -"
-          "$altMod $shiftMod, 3, exec, hyprshot -z -m window -r stdout | satty --filename -"
-          "$altMod $shiftMod, 4, exec, hyprshot -z -m region -r stdout | satty --filename -"
+          "${altMod} ${shiftMod}, 2, exec, hyprshot -z -m output -r stdout | satty --filename -"
+          "${altMod} ${shiftMod}, 3, exec, hyprshot -z -m window -r stdout | satty --filename -"
+          "${altMod} ${shiftMod}, 4, exec, hyprshot -z -m region -r stdout | satty --filename -"
         ];
       };
     };
