@@ -22,23 +22,6 @@ in
     };
 
     wayland.windowManager.hyprland = {
-      extraConfig = ''
-        # Uncomment to have logs
-        # debug:disable_logs = false
-
-        # Ignore maximize requests from apps
-        windowrule = suppressevent maximize, class:.*
-
-        # Ref https://wiki.hyprland.org/Configuring/Workspace-Rules/
-        # "Smart gaps" / "No gaps when only"
-        workspace = w[tv1], gapsout:0, gapsin:0
-        workspace = f[1], gapsout:0, gapsin:0
-        windowrule = bordersize 0, floating:0, onworkspace:w[tv1]
-        windowrule = rounding 0, floating:0, onworkspace:w[tv1]
-        windowrule = bordersize 0, floating:0, onworkspace:f[1]
-        windowrule = rounding 0, floating:0, onworkspace:f[1]
-      '';
-
       settings = {
         animations = {
           enabled = true;
@@ -126,7 +109,6 @@ in
           gaps_in = 0;
           gaps_out = 0;
           layout = "dwindle";
-          no_border_on_floating = false;
           resize_on_border = false;
         };
 
@@ -161,44 +143,69 @@ in
         };
 
         windowrule = [
-          # Browsers: Treat as dialog, let it control size
-          "tag +dialog, initialClass:browsers"
+          {
+            name = "Smart borders";
+            "match:workspace" = "w[tv1]";
 
-          # CopyQ: Treat as dialog
-          "size 640 480, initialClass:com.github.hluk.copyq"
-          "tag +dialog, initialClass:com.github.hluk.copyq"
+            border_size = 0;
+            float = "off";
+            rounding = 0;
+          }
 
-          # Disable screenshare on private windows
-          "noscreenshare, class:librewolf"
-          "noscreenshare, tag:dialog"
+          {
+            name = "Dialogs";
+            "match:tag" = "dialog";
 
-          # File handling popups: Treat as dialog
-          "size 960 640, title:^.*(Export Image|Location|Open|Progress|Save File|wants to save|wants to open|Load SVG Image).*$"
-          "tag +dialog, title:^.*(Export Image|Location|Open|Progress|Save File|wants to save|wants to open|Load SVG Image).*$"
+            float = "on";
+            move = "max(min(cursor_x-(window_w*0.5)\,(monitor_w-window_w-2))\,2) max(min(cursor_y-(window_h*0.5)\,(monitor_h-window_h-2))\,28)";
+            no_screen_share = "on";
+            pin = "on";
+          }
 
-          # Kodi: Fullscreen
-          "fullscreen, initialClass:Kodi"
+          {
+            name = "Dialog apps";
+            "match:initial_class" = "(?i)browsers";
 
-          # Password managers
-          "float, class:1Password"
-          "noscreenshare, class:1Password"
-          "float, class:Bitwarden"
-          "noscreenshare, class:Bitwarden"
+            tag = "+dialog";
+          }
 
-          # Picture-in-Picture: Float bottom right
-          "float, title:Picture-in-Picture"
-          "move 100%-656 100%-376, title:Picture-in-Picture"
-          "size 640 360, title:Picture-in-Picture"
+          {
+            name = "Dialog file handlers";
+            "match:title" = "(?i).*((load|open|save|export) (file|as|image)).*";
 
-          # Steam: Fullscreen games
-          "fullscreen, initialClass:steam_app_default"
-        ]
-        ++ [
-          # Tag rules
-          # Dialog: Center under cursor
-          "float, tag:dialog"
-          "move onscreen cursor -50% -50%, tag:dialog"
-          "pin, tag:dialog"
+            size = "960 640";
+            tag = "+dialog";
+          }
+
+          {
+            name = "Float apps";
+            "match:initial_class" = "(?i)(1password|bitwarden|librewolf)";
+
+            float = "on";
+          }
+
+          {
+            name = "Fullscreen apps";
+            "match:initial_class" = "(?i)(kodi|steam_app_default)";
+
+            fullscreen = "on";
+          }
+
+          {
+            name = "Picture in Picture";
+            "match:title" = "Picture-in-Picture";
+
+            float = "on";
+            move = "(monitor_w-656) (monitor_h-376)";
+            size = "640 360";
+          }
+
+          {
+            name = "Private apps";
+            "match:initial_class" = "(?i)(1password|bitwarden|librewolf)";
+
+            no_screen_share = "on";
+          }
         ];
       };
 
