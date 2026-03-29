@@ -21,7 +21,7 @@ in
           "${mainMod}, F, togglefloating"
           "${mainMod} ${shiftMod}, F, fullscreen"
           "${mainMod}, P, pseudo"
-          "${mainMod}, J, togglesplit"
+          "${mainMod}, J, layoutmsg, togglesplit"
           "${mainMod}, code:34, cyclenext, prev" # code:34 = [
           "${mainMod}, code:35, cyclenext" # code:35 = ]
 
