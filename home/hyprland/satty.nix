@@ -72,6 +72,16 @@ in
           "${altMod} ${shiftMod}, 3, exec, hyprshot -z -m window -r stdout | satty --filename -"
           "${altMod} ${shiftMod}, 4, exec, hyprshot -z -m region -r stdout | satty --filename -"
         ];
+
+        windowrule = [
+          {
+            name = "App: satty";
+            "match:initial_class" = "com.gabm.satty";
+
+            float = "on";
+            move = "max(min(cursor_x-(window_w*0.5)\,(monitor_w-window_w-2))\,2) max(min(cursor_y-(window_h*0.5)\,(monitor_h-window_h-2))\,28)";
+          }
+        ];
       };
     };
   };
