@@ -6,6 +6,7 @@
 }:
 let
   inherit (config.ozzie.workstation) hyprland;
+  inherit (hyprland) mainMod shiftMod;
   inherit (config.ozzie.workstation.theme) colours;
 
   accent = lib.strings.removePrefix "#" colours.accent;
@@ -91,11 +92,11 @@ in
     wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
       settings = lib.mkIf hyprland.binds {
         bind = [
-          "$mainMod, L, exec, hyprlock --immediate"
+          "${mainMod}, L, exec, hyprlock --immediate"
         ];
 
         bindl = [
-          "$mainMod $shiftMod, L, exec, pkill hyprlock; hyprctl --instance 0 'keyword misc:allow_session_lock_restore 1'; hyprctl --instance 0 'dispatch exec hyprlock'"
+          "${mainMod} ${shiftMod}, L, exec, pkill hyprlock; hyprctl --instance 0 'keyword misc:allow_session_lock_restore 1'; hyprctl --instance 0 'dispatch exec hyprlock'"
         ];
       };
     };

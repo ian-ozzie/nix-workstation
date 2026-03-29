@@ -5,7 +5,9 @@
 }:
 let
   inherit (config.ozzie.workstation) hyprland;
-  inherit (config.ozzie.workstation.theme.colours)
+  inherit (hyprland) mainMod ctrlMod shiftMod;
+  inherit (config.ozzie.workstation.theme) colours;
+  inherit (colours)
     accent
     alert
     base
@@ -421,10 +423,10 @@ in
     wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
       settings = lib.mkIf hyprland.binds {
         bind = [
-          "$mainMod, N, exec, swaync-client -t -sw"
+          "${mainMod}, N, exec, swaync-client -t -sw"
         ]
-        ++ lib.optional (!hyprland.tinker) "$mainMod $shiftMod, N, exec, pkill swaync || swaync"
-        ++ lib.optional hyprland.tinker "$mainMod $shiftMod $ctrlMod, N, exec, pkill swaync || GTK_DEBUG=interactive swaync";
+        ++ lib.optional (!hyprland.tinker) "${mainMod} ${shiftMod}, N, exec, pkill swaync || swaync"
+        ++ lib.optional hyprland.tinker "${mainMod} ${shiftMod} ${ctrlMod}, N, exec, pkill swaync || GTK_DEBUG=interactive swaync";
       };
     };
   };

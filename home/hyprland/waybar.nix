@@ -12,6 +12,7 @@ let
     wlogout
     yubikey-touch-detector
     ;
+  inherit (hyprland) mainMod shiftMod;
 
   inherit (config.ozzie.workstation.theme.colours)
     accent
@@ -483,10 +484,10 @@ in
         exec-once = [ "waybar" ];
 
         bind = lib.mkIf hyprland.binds ([
-          "$mainMod, B, exec, pgrep waybar || waybar"
+          "${mainMod}, B, exec, pgrep waybar || waybar"
         ]
-        ++ lib.optional (!hyprland.tinker) "$mainMod $shiftMod, B, exec, pkill waybar || waybar"
-        ++ lib.optional hyprland.tinker "$mainMod $shiftMod, B, exec, pkill waybar || GTK_DEBUG=interactive waybar");
+        ++ lib.optional (!hyprland.tinker) "${mainMod} ${shiftMod}, B, exec, pkill waybar || waybar"
+        ++ lib.optional hyprland.tinker "${mainMod} ${shiftMod}, B, exec, pkill waybar || GTK_DEBUG=interactive waybar");
       };
     };
   };

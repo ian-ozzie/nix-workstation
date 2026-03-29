@@ -5,6 +5,7 @@
 }:
 let
   inherit (config.ozzie.workstation) hyprland;
+  inherit (hyprland) mainMod;
 
   cfg = config.ozzie.workstation.pcmanfm;
 in
@@ -13,7 +14,7 @@ in
     wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
       settings = lib.mkIf hyprland.binds {
         bind = [
-          "$mainMod, E, exec, pcmanfm"
+          "${mainMod}, E, exec, pcmanfm"
         ];
       };
     };
