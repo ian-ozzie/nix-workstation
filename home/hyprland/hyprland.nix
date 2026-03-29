@@ -108,7 +108,7 @@ in
           border_size = 1;
           gaps_in = 0;
           gaps_out = 0;
-          layout = "dwindle";
+          layout = "scrolling";
           resize_on_border = false;
         };
 
@@ -140,6 +140,11 @@ in
           force_default_wallpaper = 1;
           key_press_enables_dpms = true;
           mouse_move_enables_dpms = true;
+        };
+
+        scrolling = {
+          explicit_column_widths = lib.mkDefault "0.2, 0.333, 0.5, 0.667, 0.8, 1.0";
+          follow_min_visible = lib.mkDefault 0.0;
         };
 
         windowrule = [
