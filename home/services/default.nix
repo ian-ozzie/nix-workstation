@@ -1,5 +1,6 @@
 {
   imports = [
+    ./cliphist.nix
     ./flameshot.nix
     ./hypridle.nix
     ./hyprlauncher.nix
