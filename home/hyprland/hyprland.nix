@@ -83,6 +83,7 @@ in
           "CLUTTER_BACKEND, wayland"
           "GDK_BACKEND, wayland,x11,*"
           "GDK_SCALE, 1"
+          "GTK_USE_PORTAL, 1"
           "MOZ_ENABLE_WAYLAND, 1"
           "NIXOS_OZONE_WL, 1"
           "NIXPKGS_ALLOW_UNFREE, 1"
@@ -176,9 +177,9 @@ in
 
           {
             name = "Dialog file handlers";
-            "match:title" = "(?i).*((load|open|save|export) (file|as|image)).*";
+            "match:title" = "(?i).*((load|open|save|export|file) (to )?(save|load|folder|file|as|image)).*";
 
-            size = "960 640";
+            size = "<50% <50%";
             tag = "+dialog";
           }
 

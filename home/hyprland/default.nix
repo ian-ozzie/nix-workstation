@@ -25,6 +25,7 @@
     ./tofi.nix
     ./waybar.nix
     ./wlogout.nix
+    ./xdg.nix
   ];
 
   home.packages = with pkgs; [
