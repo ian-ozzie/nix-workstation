@@ -192,6 +192,7 @@ in
           "signon.autofillForms" = false;
           "signon.formlessCapture.enabled" = false; # Not sure what this does.
           "signon.rememberSignons" = false;
+          "widget.use-xdg-desktop-portal.file-picker" = true;
         };
       };
     };
