@@ -10,6 +10,7 @@ in
 {
   options.ozzie.workstation.kitty = {
     enable = lib.mkEnableOption "opinionated kitty config";
+    portal = lib.mkEnableOption "kitty as file/settings portal";
 
     binds = lib.mkEnableOption "configures binds" // {
       default = cfg.enable;
@@ -109,6 +110,32 @@ in
         scrollback_pager_history_size = 20;
         tab_bar_min_tabs = 1;
         wheel_scroll_min_lines = 1;
+      };
+    };
+
+    home.packages = lib.mkIf cfg.portal [
+      pkgs.xdg-desktop-portal-gtk
+      (pkgs.runCommand "kitty-portal-files" { } ''
+        mkdir -p $out/share/dbus-1/services
+        cat > $out/share/dbus-1/services/org.freedesktop.impl.portal.desktop.kitty.service << 'EOF'
+        [D-BUS Service]
+        Name=org.freedesktop.impl.portal.desktop.kitty
+        Exec=${config.programs.kitty.package}/bin/kitten desktop-ui run-server
+        EOF
+
+        mkdir -p $out/share/xdg-desktop-portal/portals
+        cat > $out/share/xdg-desktop-portal/portals/kitty.portal << 'EOF'
+        [portal]
+        DBusName=org.freedesktop.impl.portal.desktop.kitty
+        Interfaces=org.freedesktop.impl.portal.Settings;org.freedesktop.impl.portal.FileChooser;
+        EOF
+      '')
+    ];
+
+    xdg.portal.config = lib.mkIf cfg.portal {
+      hyprland = {
+        "org.freedesktop.impl.portal.FileChooser" = [ "kitty" ];
+        "org.freedesktop.impl.portal.Settings" = [ "kitty" ];
       };
     };
   };

@@ -46,6 +46,7 @@
     hyprtoolkit.enable = lib.mkDefault true;
     kitty.binds = lib.mkDefault true;
     kitty.enable = lib.mkDefault true;
+    kitty.portal = lib.mkDefault true;
     pcmanfm.enable = lib.mkDefault true;
     starship.enable = lib.mkDefault true;
     satty.enable = lib.mkDefault true;
