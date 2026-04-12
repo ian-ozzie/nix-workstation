@@ -12,9 +12,8 @@
     hyprland.enable = true;
     theme.wallpaper.svg = lib.mkDefault ./square.svg;
 
-    greetd = {
+    ly = {
       enable = lib.mkDefault true;
-      command = lib.mkDefault "start-hyprland";
     };
 
     plymouth = {
