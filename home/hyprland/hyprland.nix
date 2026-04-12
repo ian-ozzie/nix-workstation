@@ -97,10 +97,7 @@ in
           "XDG_SESSION_TYPE, wayland"
         ];
 
-        exec-once = [
-          "dbus-update-activation-environment --all --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-          "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        ];
+        exec-once = [ ];
 
         general = {
           "col.active_border" = "rgb(${highlight})";
