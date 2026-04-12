@@ -9,6 +9,7 @@
   xdg.enable = true;
 
   imports = [
+    ./gtk.nix
     ./hypridle.nix
     ./hyprland.nix
     ./hyprlauncher.nix
