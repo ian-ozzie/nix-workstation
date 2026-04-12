@@ -9,6 +9,7 @@
   xdg.enable = true;
 
   imports = [
+    ./dconf.nix
     ./gtk.nix
     ./hypridle.nix
     ./hyprland.nix
