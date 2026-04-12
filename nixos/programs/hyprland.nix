@@ -17,6 +17,7 @@ in
       enable = true;
       package = with pkgs; hyprland;
       portalPackage = with pkgs; xdg-desktop-portal-hyprland;
+      withUWSM = true;
     };
   };
 }
