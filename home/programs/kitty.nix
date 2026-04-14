@@ -132,10 +132,32 @@ in
       '')
     ];
 
-    xdg.portal.config = lib.mkIf cfg.portal {
-      hyprland = {
-        "org.freedesktop.impl.portal.FileChooser" = [ "kitty" ];
-        "org.freedesktop.impl.portal.Settings" = [ "kitty" ];
+    xdg = {
+      configFile = {
+        "kitty/choose-files.conf" = lib.mkIf (cfg.portal && cfg.binds) {
+          text = ''
+            map ctrl+h cd ~
+            map ctrl+s cd ~/src
+            map ctrl+d cd ~/downloads
+            map ctrl+f cd ~/files
+            map ctrl+p cd ~/pictures
+
+            map ctrl+c quit
+
+            map enter accept
+            map shift+enter select
+            map alt+i toggle ignorefiles
+            map alt+. toggle dotfiles
+            map alt+d toggle sort_by_dates
+          '';
+        };
+      };
+
+      portal.config = lib.mkIf cfg.portal {
+        hyprland = {
+          "org.freedesktop.impl.portal.FileChooser" = [ "kitty" ];
+          "org.freedesktop.impl.portal.Settings" = [ "kitty" ];
+        };
       };
     };
   };
