@@ -29,9 +29,13 @@ in
 
           # Move layout focus with mainMod + vim keys
           "${mainMod}, H, layoutmsg, focus l"
+          "${mainMod} ${shiftMod}, H, layoutmsg, swapcol l"
           "${mainMod}, L, layoutmsg, focus r"
+          "${mainMod} ${shiftMod}, L, layoutmsg, swapcol r"
           "${mainMod}, K, layoutmsg, focus u"
+          "${mainMod} ${shiftMod}, K, layoutmsg, swapcol u"
           "${mainMod}, J, layoutmsg, focus d"
+          "${mainMod} ${shiftMod}, J, layoutmsg, swapcol d"
 
           # Move focus with mainMod + arrow keys
           "${mainMod}, left, movefocus, l"
