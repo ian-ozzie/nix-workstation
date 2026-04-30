@@ -45,7 +45,7 @@ in
       signcolumn = "yes";
 
       # Highlight hidden characters
-      listchars = ''tab:󰌒 ,trail:·,nbsp:␣,extends:›'';
+      listchars = "tab:󰌒 ,trail:·,nbsp:␣,extends:›";
 
       # Decrease update time
       updatetime = 250;
