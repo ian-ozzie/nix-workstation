@@ -141,6 +141,7 @@ in
         };
 
         scrolling = {
+          column_width = lib.mkDefault 1.0;
           explicit_column_widths = lib.mkDefault "0.2, 0.333, 0.5, 0.667, 0.8, 1.0";
           follow_min_visible = lib.mkDefault 0.0;
         };
@@ -166,6 +167,13 @@ in
           }
 
           {
+            name = "Dialog portals";
+            "match:initial_class" = "(?i)xdg-desktop-portal-gtk";
+
+            tag = "+dialog";
+          }
+
+          {
             name = "Dialog apps";
             "match:initial_class" = "(?i)browsers";
 
@@ -182,7 +190,7 @@ in
 
           {
             name = "Float apps";
-            "match:initial_class" = "(?i)(1password|bitwarden|librewolf)";
+            "match:initial_class" = "(?i)(1password|bitwarden|librewolf|steam)";
 
             float = "on";
           }
