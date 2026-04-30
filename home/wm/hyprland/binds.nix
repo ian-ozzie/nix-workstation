@@ -26,6 +26,7 @@ in
           "${mainMod}, code:35, layoutmsg, focus r" # code:35 = ]
           "${mainMod} ${shiftMod}, code:35, layoutmsg, swapcol r" # code:35 = ]
           "${mainMod}, code:51, layoutmsg, promote" # code:51 = \
+          "${mainMod} ${shiftMod}, code:51, layoutmsg, fit visible" # code:51 = \
 
           # Move layout focus with mainMod + vim keys
           "${mainMod}, H, layoutmsg, focus l"
@@ -50,7 +51,9 @@ in
 
           # Increase window size
           "${mainMod}, equal, layoutmsg, colresize +conf"
+          "${mainMod} ${shiftMod}, equal, layoutmsg, colresize +0.1"
           "${mainMod}, minus, layoutmsg, colresize -conf"
+          "${mainMod} ${shiftMod}, minus, layoutmsg, colresize -0.1"
 
           # Scratchpad workspace
           "${mainMod}, S, togglespecialworkspace, magic"
