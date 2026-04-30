@@ -483,11 +483,13 @@ in
       settings = {
         exec-once = [ "waybar" ];
 
-        bind = lib.mkIf hyprland.binds ([
-          "${mainMod}, B, exec, pgrep waybar || waybar"
-        ]
-        ++ lib.optional (!hyprland.tinker) "${mainMod} ${shiftMod}, B, exec, pkill waybar || waybar"
-        ++ lib.optional hyprland.tinker "${mainMod} ${shiftMod}, B, exec, pkill waybar || GTK_DEBUG=interactive waybar");
+        bind = lib.mkIf hyprland.binds (
+          [
+            "${mainMod}, B, exec, pgrep waybar || waybar"
+          ]
+          ++ lib.optional (!hyprland.tinker) "${mainMod} ${shiftMod}, B, exec, pkill waybar || waybar"
+          ++ lib.optional hyprland.tinker "${mainMod} ${shiftMod}, B, exec, pkill waybar || GTK_DEBUG=interactive waybar"
+        );
       };
     };
   };

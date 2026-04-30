@@ -5,7 +5,12 @@
 }:
 let
   inherit (config.ozzie.workstation) hyprland;
-  inherit (hyprland) mainMod altMod ctrlMod shiftMod;
+  inherit (hyprland)
+    mainMod
+    altMod
+    ctrlMod
+    shiftMod
+    ;
 in
 {
   config = {
