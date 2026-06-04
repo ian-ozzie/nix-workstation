@@ -92,7 +92,7 @@ in
     wayland.windowManager.hyprland = lib.mkIf hyprland.enable {
       settings = lib.mkIf hyprland.binds {
         bind = [
-          "${mainMod}, escape, exec, hyprlock --immediate"
+          "${mainMod}, escape, exec, hyprlock --grace 0"
         ];
 
         bindl = [

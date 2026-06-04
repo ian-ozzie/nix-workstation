@@ -2,11 +2,11 @@
   description = "Ozzie's NixOS workstation configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
 
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/release-26.05";
     };
 
     nvf = {
@@ -16,7 +16,7 @@
 
     stylix = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/stylix/master";
+      url = "github:nix-community/stylix/release-26.05";
     };
   };
 
