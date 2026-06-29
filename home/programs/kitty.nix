@@ -52,7 +52,7 @@ in
           "ctrl+shift+tab" = "previous_tab";
           "ctrl+shift+t" = "set_tab_title";
 
-          "ctrl+shift+l" = "clear_terminal reset active";
+          "ctrl+shift+l" = "combine : clear_terminal clear active : clear_terminal scrollback active";
           "ctrl+shift+w" = "close_window";
 
           "ctrl+shift+j" = "scroll_page_down";
