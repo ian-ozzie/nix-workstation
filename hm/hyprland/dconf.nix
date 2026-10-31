@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   ...
 }:
 let
@@ -9,12 +8,8 @@ let
   prefer-dark = theme.polarity == "dark";
 in
 {
-  gtk = {
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = prefer-dark;
-    };
-
-    gtk4.extraConfig = {
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
       gtk-application-prefer-dark-theme = prefer-dark;
     };
   };

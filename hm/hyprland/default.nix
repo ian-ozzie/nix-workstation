@@ -46,9 +46,6 @@
     hyprpolkitagent.enable = lib.mkDefault true;
     hyprsunset.enable = lib.mkDefault true;
     hyprtoolkit.enable = lib.mkDefault true;
-    kitty.binds = lib.mkDefault true;
-    kitty.enable = lib.mkDefault true;
-    kitty.portal = lib.mkDefault true;
     pcmanfm.enable = lib.mkDefault true;
     starship.enable = lib.mkDefault true;
     satty.enable = lib.mkDefault true;
@@ -57,5 +54,11 @@
     tofi.enable = lib.mkDefault false;
     waybar.enable = lib.mkDefault true;
     wlogout.enable = lib.mkDefault false;
+
+    kitty = {
+      binds = lib.mkDefault true;
+      enable = lib.mkDefault true;
+      portal = lib.mkDefault true;
+    };
   };
 }

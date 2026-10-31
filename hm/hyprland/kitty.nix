@@ -4,7 +4,7 @@
   ...
 }:
 let
-  inherit (config.ozzie.workstation) hyprland preset;
+  inherit (config.ozzie.workstation) hyprland;
   inherit (hyprland) mainMod;
   inherit (config.ozzie.workstation.theme) colours;
   inherit (colours)

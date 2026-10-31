@@ -1,12 +1,9 @@
-{
-  imports = [
-    ../shared
-    ../workstation
-
-    ./files
-    ./programs
-    ./services
-    ./wm
-    ./workstation
-  ];
+let
+  modules = { };
+in
+modules
+// {
+  default = {
+    imports = builtins.attrValues modules;
+  };
 }
