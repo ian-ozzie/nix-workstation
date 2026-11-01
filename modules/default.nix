@@ -1,5 +1,7 @@
 let
-  modules = { };
+  modules = {
+    options = ../options;
+  };
 in
 modules
 // {

@@ -1,6 +1,7 @@
 {
   imports = [
-    ./preset.nix
+    ./appearance.nix
+    ./binds.nix
     ./theme.nix
   ];
 }

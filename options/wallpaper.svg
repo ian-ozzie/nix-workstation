@@ -39,7 +39,7 @@
    <stop stop-color="#791aea" offset="0"/>
   </linearGradient>
   <linearGradient id="h" x1="467.92" x2="612.08" y1="540" y2="540" gradientTransform="matrix(1.0405 0 0 1.0405 -21.845 -21.845)" gradientUnits="userSpaceOnUse">
-   <stop stop-color="#1e1e2e" offset="0"/>
+   <stop stop-color="#11111b" offset="0"/>
   </linearGradient>
  </defs>
  <rect width="1080" height="1080" fill="url(#m)" stroke="url(#j)" stroke-width=".675"/>
