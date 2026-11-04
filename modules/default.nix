@@ -3,6 +3,7 @@ let
     options = ../options;
 
     greetd = ./greetd.nix;
+    hyprland = ./hyprland.nix;
     plymouth = ./plymouth.nix;
     regreet = ./regreet.nix;
   };
@@ -11,5 +12,15 @@ modules
 // {
   default = {
     imports = builtins.attrValues modules;
+  };
+
+  hyprland-desktop = { lib, ... }: {
+    imports = builtins.attrValues modules;
+
+    ozzie.workstation = {
+      hyprland.enable = lib.mkDefault true;
+      plymouth.enable = lib.mkDefault true;
+      regreet.enable = lib.mkDefault true;
+    };
   };
 }

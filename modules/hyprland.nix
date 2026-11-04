@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -13,10 +12,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    ozzie.appearance.wallpaper.svg = lib.mkDefault ./hyprland.svg;
+
     programs.hyprland = {
       enable = true;
-      package = with pkgs; hyprland;
-      portalPackage = with pkgs; xdg-desktop-portal-hyprland;
       withUWSM = true;
     };
   };
