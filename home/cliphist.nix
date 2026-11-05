@@ -17,7 +17,6 @@ in
       allowImages = false;
       clipboardPackage = with pkgs; wl-clipboard;
       enable = true;
-      package = with pkgs; cliphist;
     };
   };
 }
