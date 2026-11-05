@@ -6,6 +6,7 @@ let
     hyprland = ./hyprland.nix;
     plymouth = ./plymouth.nix;
     regreet = ./regreet.nix;
+    xdg = ./xdg.nix;
   };
 in
 modules
@@ -21,6 +22,11 @@ modules
       hyprland.enable = lib.mkDefault true;
       plymouth.enable = lib.mkDefault true;
       regreet.enable = lib.mkDefault true;
+
+      xdg = {
+        enable = lib.mkDefault true;
+        fileChooser = lib.mkDefault "kitty";
+      };
     };
   };
 }
