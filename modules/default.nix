@@ -4,6 +4,7 @@ let
 
     greetd = ./greetd.nix;
     hyprland = ./hyprland.nix;
+    hyprpolkitagent = ./hyprpolkitagent.nix;
     plymouth = ./plymouth.nix;
     regreet = ./regreet.nix;
     xdg = ./xdg.nix;
@@ -20,6 +21,7 @@ modules
 
     ozzie.workstation = {
       hyprland.enable = lib.mkDefault true;
+      hyprpolkitagent.enable = lib.mkDefault true;
       plymouth.enable = lib.mkDefault true;
       regreet.enable = lib.mkDefault true;
 
