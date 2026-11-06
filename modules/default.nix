@@ -6,6 +6,8 @@ let
     hyprland = ./hyprland.nix;
     hyprlock = ./hyprlock.nix;
     hyprpolkitagent = ./hyprpolkitagent.nix;
+    noctalia = ./noctalia.nix;
+    noctalia-greeter = ./noctalia-greeter.nix;
     plymouth = ./plymouth.nix;
     regreet = ./regreet.nix;
     xdg = ./xdg.nix;
@@ -26,6 +28,22 @@ modules
       hyprpolkitagent.enable = lib.mkDefault true;
       plymouth.enable = lib.mkDefault true;
       regreet.enable = lib.mkDefault true;
+
+      xdg = {
+        enable = lib.mkDefault true;
+        fileChooser = lib.mkDefault "kitty";
+      };
+    };
+  };
+
+  hyprland-noctalia = { lib, ... }: {
+    imports = builtins.attrValues modules;
+
+    ozzie.workstation = {
+      hyprland.enable = lib.mkDefault true;
+      noctalia-greeter.enable = lib.mkDefault true;
+      noctalia.enable = lib.mkDefault true;
+      plymouth.enable = lib.mkDefault true;
 
       xdg = {
         enable = lib.mkDefault true;
