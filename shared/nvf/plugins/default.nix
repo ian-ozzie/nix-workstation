@@ -2,7 +2,7 @@
   imports = [
     ./git.nix
     ./terminal.nix
-    # ./ui.nix
+    ./ui.nix
     # ./utility.nix
     # ./visuals.nix
   ];
