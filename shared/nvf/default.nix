@@ -9,7 +9,7 @@
     ./misc.nix
     ./options.nix
 
-    # ./languages
+    ./languages
     # ./plugins
   ];
 

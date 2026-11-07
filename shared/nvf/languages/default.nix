@@ -7,21 +7,53 @@ let
   cfg = config.ozzie.workstation.nvf.languages;
 in
 {
+  options.ozzie.workstation.nvf.languages = {
+    enable = lib.mkEnableOption "opinionated languages config" // {
+      default = true;
+    };
+  };
+
   imports = [
-    ./nix.nix
-    ./php.nix
-    ./rust.nix
-    ./ts.nix
+    # ./nix.nix
+    # ./php.nix
+    # ./rust.nix
+    # ./ts.nix
   ];
 
   config = lib.mkIf cfg.enable {
     programs.nvf.settings.vim = {
+      autocomplete.blink-cmp = {
+        enable = true;
+
+        setupOpts = {
+          cmdline.enabled = false;
+          completion.list.selection.preselect = false;
+          signature.enabled = true;
+        };
+      };
+
       languages = {
-        bash.enable = true;
         enableExtraDiagnostics = true;
         enableFormat = false;
         enableTreesitter = true;
-        markdown.enable = true;
+
+        bash = {
+          enable = true;
+
+          format = {
+            enable = true;
+            type = [ "shfmt" ];
+          };
+        };
+
+        markdown = {
+          enable = true;
+
+          format = {
+            enable = true;
+            type = [ "prettier" ];
+          };
+        };
       };
 
       lsp = {
@@ -29,7 +61,7 @@ in
         formatOnSave = false;
         inlayHints.enable = true;
         lightbulb.enable = false;
-        lspSignature.enable = true;
+        lspSignature.enable = false;
         lspkind.enable = false;
         lspsaga.enable = false;
         nvim-docs-view.enable = false;
