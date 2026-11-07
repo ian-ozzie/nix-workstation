@@ -8,8 +8,19 @@ let
   cfg = config.ozzie.workstation.nvf.plugins.utility;
 in
 {
+  options.ozzie.workstation.nvf.plugins.utility = {
+    enable = lib.mkEnableOption "opinionated utility plugins config" // {
+      default = true;
+    };
+  };
+
   config = lib.mkIf cfg.enable {
     programs.nvf.settings.vim = {
+      fzf-lua.enable = false;
+      gestures.gesture-nvim.enable = false;
+      navigation.harpoon.enable = false;
+      telescope.enable = true;
+
       binds = {
         whichKey = {
           enable = true;
@@ -20,10 +31,20 @@ in
         "bigfile-nvim" = {
           package = with pkgs; vimPlugins.bigfile-nvim;
 
-          # Filesize is in MiB
           setup = ''
             require('bigfile').setup({
-              filesize = 4,
+              filesize = 4, -- In MiB
+
+              features = {
+                "indent_blankline",
+                "illuminate",
+                "lsp",
+                "treesitter",
+                "syntax",
+                "matchparen",
+                "vimopts",
+                "filetype",
+              },
             })
           '';
         };
@@ -40,50 +61,61 @@ in
       };
 
       luaConfigRC.no-trailing-whitespace = ''
-        -- https://old.reddit.com/r/neovim/comments/1pfs3kf/remove_trailing_space_on_save/
-        -- Remove trailing whitespace on save
+        -- https://github.com/neovim/neovim/blob/v0.11.5/runtime/lua/editorconfig.lua#L157-L160
+        -- Remove trailing whitespace on save, hook so it doesn't require editorconfig within projects
         vim.api.nvim_create_autocmd("BufWritePre", {
           pattern = "*",
           callback = function()
-            local bufnr = vim.api.nvim_get_current_buf()
-            local pos = vim.api.nvim_win_get_cursor(0)
-            local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-            local modified = false
-
-            for i, line in ipairs(lines) do
-              local trimmed = line:gsub("%s+$", "")
-              if trimmed ~= line then
-                lines[i] = trimmed
-                modified = true
-              end
-            end
-
-            if modified then
-              vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-            end
-
-            vim.api.nvim_win_set_cursor(0, pos)
+            local view = vim.fn.winsaveview()
+            vim.api.nvim_command('silent! undojoin')
+            vim.api.nvim_command('silent keepjumps keeppatterns %s/\\s\\+$//e')
+            vim.fn.winrestview(view)
           end,
         })
       '';
 
       utility = {
+        auto-indent-nvim.enable = false;
         ccc.enable = true;
-        diffview-nvim.enable = true;
+        crazy-coverage.enable = false;
+        csvview.enable = false;
+        diffview-nvim.enable = false;
         direnv.enable = true;
+        guess-indent-nvim.enable = false;
+        icon-picker.enable = false;
+        leetcode-nvim.enable = false;
         mkdir.enable = true;
+        multicursors.enable = false;
+        new-file-template.enable = false;
         nix-develop.enable = true;
+        oil-nvim.enable = false;
+        outline.aerial-nvim.enable = false;
+        qmk-nvim.enable = false;
         sleuth.enable = true;
+        smart-paste-nvim.enable = false;
         snacks-nvim.enable = false;
         surround.enable = true;
+        undotree.enable = false;
+        vim-wakatime.enable = false;
         yanky-nvim.enable = false;
 
-        motion.leap = {
-          enable = true;
+        images = {
+          image-nvim.enable = false;
+          img-clip.enable = false;
+        };
 
-          mappings = {
-            leapBackwardTo = "S";
-            leapForwardTo = "s";
+        motion = {
+          flash-nvim.enable = false;
+          hop.enable = false;
+          precognition.enable = false;
+
+          leap = {
+            enable = true;
+
+            mappings = {
+              leapBackwardTo = "S";
+              leapForwardTo = "s";
+            };
           };
         };
 
@@ -92,9 +124,21 @@ in
           setupOpts.cursor_line_only = true;
         };
 
+        preview = {
+          glow.enable = false;
+          markdownPreview.enable = false;
+        };
+
         smart-splits = {
           enable = true;
-          keymaps.move_cursor_previous = "<C-`>";
+
+          keymaps = {
+            move_cursor_down = null;
+            move_cursor_left = null;
+            move_cursor_previous = "<C-`>";
+            move_cursor_right = null;
+            move_cursor_up = null;
+          };
         };
       };
     };

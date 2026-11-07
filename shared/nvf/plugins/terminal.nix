@@ -47,8 +47,13 @@ in
                   return
                 end
 
-                for _, direction in ipairs({ "h", "j", "k", "l" }) do
-                  vim.keymap.set("t", "<C-" .. direction .. ">", "<Cmd>wincmd " .. direction .. "<CR>", {
+                for direction, movement in pairs({ h = "left", j = "down", k = "up", l = "right" }) do
+                  vim.keymap.set("t", "<C-" .. direction .. ">", ${
+                    if config.programs.nvf.settings.vim.utility.smart-splits.enable then
+                      ''function() require("smart-splits")["move_cursor_" .. movement]() end''
+                    else
+                      ''"<Cmd>wincmd " .. direction .. "<CR>"''
+                  }, {
                     buffer = term.bufnr,
                     silent = true,
                   })

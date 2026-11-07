@@ -3,7 +3,7 @@
     ./git.nix
     ./terminal.nix
     ./ui.nix
-    # ./utility.nix
+    ./utility.nix
     # ./visuals.nix
   ];
 }
