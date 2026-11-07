@@ -14,7 +14,7 @@ in
   };
 
   imports = [
-    # ./nix.nix
+    ./nix.nix
     # ./php.nix
     # ./rust.nix
     # ./ts.nix

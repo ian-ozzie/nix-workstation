@@ -59,6 +59,22 @@
 
               modules = [
                 (import ./modules).nvf
+
+                {
+                  ozzie.workstation.nvf.languages.nix.nixd.optionExprs.nixos = ''
+                    let
+                      flake = builtins.getFlake "${inputs.self.outPath}";
+                    in
+                    (flake.inputs.nixpkgs.lib.nixosSystem {
+                      system = "${system}";
+                      specialArgs.inputs = flake.inputs;
+                      modules = [
+                        flake.nixosModules.nvf
+                        ${lib.optionalString withOptions ''(flake.outPath + "/options")''}
+                      ];
+                    }).options
+                  '';
+                }
               ]
               ++ lib.optionals withOptions [
                 ./options
