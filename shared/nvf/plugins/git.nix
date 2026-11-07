@@ -1,27 +1,26 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
   cfg = config.ozzie.workstation.nvf.plugins.git;
 in
 {
+  options.ozzie.workstation.nvf.plugins.git = {
+    enable = lib.mkEnableOption "opinionated git plugins config" // {
+      default = true;
+    };
+  };
+
   config = lib.mkIf cfg.enable {
     programs.nvf.settings.vim = {
       binds = {
         whichKey.register = {
-          "<leader>h" = lib.mkForce null;
+          "<leader>c" = "Git-Conflict";
           "<leader>g" = "Git";
           "<leader>gt" = "Toggle";
-          "<leader>c" = "Git-Conflict";
-        };
-      };
-
-      extraPlugins = {
-        "git-messenger-vim" = {
-          package = with pkgs; vimPlugins.git-messenger-vim;
+          "<leader>h" = lib.mkForce null;
         };
       };
 
@@ -36,12 +35,12 @@ in
           enable = true;
 
           mappings = {
-            nextConflict = "<leader>c[";
-            prevConflict = "<leader>c]";
-            ours = "<leader>co";
-            theirs = "<leader>ct";
             both = "<leader>cb";
+            nextConflict = "]x";
             none = "<leader>c0";
+            ours = "<leader>co";
+            prevConflict = "[x";
+            theirs = "<leader>ct";
           };
         };
 
@@ -51,33 +50,39 @@ in
           setupOpts.current_line_blame = true;
 
           mappings = {
-            blameLine = null;
+            blameLine = "<leader>gb";
             diffProject = "<leader>gD";
             diffThis = "<leader>gd";
-            nextHunk = "<leader>g]";
+            nextHunk = null;
             previewHunk = "<leader>gP";
-            previousHunk = "<leader>g[";
+            previousHunk = null;
             resetBuffer = "<leader>gR";
             resetHunk = "<leader>gr";
             stageBuffer = "<leader>gS";
             stageHunk = "<leader>gs";
-            toggleBlame = "<leader>gtb";
-            toggleDeleted = "<leader>gtd";
-            undoStageHunk = "<leader>gu";
+            toggleBlame = "<leader>gtB";
+            toggleDeleted = null;
+            undoStageHunk = null;
           };
         };
       };
 
-      globals = {
-        git_messenger_include_diff = "current";
-        git_messenger_no_default_mappings = true;
-      };
-
       maps = {
         normal = {
-          "<leader>gb" = {
-            action = ":GitMessenger<CR>";
-            desc = "Blame [Git-Messenger]";
+          "[h" = {
+            action = "<cmd>Gitsigns nav_hunk prev<CR>";
+          };
+          "]h" = {
+            action = "<cmd>Gitsigns nav_hunk next<CR>";
+          };
+          "<leader>gc" = {
+            action = "<cmd>Gitsigns setqflist all<CR>";
+          };
+          "<leader>gtb" = {
+            action = "<cmd>Gitsigns blame<CR>";
+          };
+          "<leader>gtd" = {
+            action = "<cmd>Gitsigns preview_hunk_inline<CR>";
           };
         };
       };

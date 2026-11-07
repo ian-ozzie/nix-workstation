@@ -10,7 +10,7 @@
     ./options.nix
 
     ./languages
-    # ./plugins
+    ./plugins
   ];
 
   config = {
