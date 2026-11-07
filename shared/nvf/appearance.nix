@@ -4,18 +4,9 @@
   ...
 }:
 let
-  inherit (config.ozzie.workstation) preset;
-
-  cfg = config.ozzie.workstation.nvf;
-in
-{
-  config = lib.mkIf cfg.enable {
-    programs.nvf.settings.vim.theme = {
-      enable = true;
-      transparent = lib.mkDefault false;
-    }
-    // {
-      none = { };
+  preset =
+    {
+      "" = { };
 
       catppuccin-mocha = {
         name = "catppuccin";
@@ -41,10 +32,14 @@ in
         style = "night";
       };
     }
-    ."${preset}";
-
-    stylix.targets.nvf = lib.mkIf (preset != "none") {
-      enable = false;
-    };
-  };
+    .${toString (config.ozzie.appearance.preset or null)};
+in
+{
+  programs.nvf.settings.vim.theme = lib.mkIf (preset != { }) (
+    {
+      enable = true;
+      transparent = lib.mkDefault false;
+    }
+    // preset
+  );
 }

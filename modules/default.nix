@@ -51,4 +51,11 @@ modules
       };
     };
   };
+
+  nvf = { inputs, ... }: {
+    imports = [
+      inputs.nvf.nixosModules.default
+      ../shared/nvf
+    ];
+  };
 }

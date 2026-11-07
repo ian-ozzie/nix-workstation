@@ -21,7 +21,7 @@
       dev-tools,
       nixpkgs,
       ...
-    }:
+    }@inputs:
     let
       inherit (dev-tools.lib) forSystem hooks;
       inherit (nixpkgs) lib;
@@ -40,6 +40,44 @@
       homeModules = import ./home;
       lib = import ./lib;
       nixosModules = import ./modules;
+
+      packages = forEachSystem (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          presets = import ./options/presets.nix { inherit pkgs; };
+
+          mkNvf =
+            {
+              preset ? null,
+              withOptions ? true,
+            }:
+            (nixpkgs.lib.nixosSystem {
+              inherit system;
+
+              specialArgs = { inherit inputs; };
+
+              modules = [
+                (import ./modules).nvf
+              ]
+              ++ lib.optionals withOptions [
+                ./options
+
+                { ozzie.appearance.preset = preset; }
+              ];
+            }).config.programs.nvf.finalPackage;
+        in
+        {
+          nvf = mkNvf { };
+          nvf-bare = mkNvf { withOptions = false; };
+        }
+        // lib.mapAttrs' (
+          name: _:
+          lib.nameValuePair "nvf-${name}" (mkNvf {
+            preset = name;
+          })
+        ) presets
+      );
 
       checks = forEachSystem (system: {
         lint = (forSystem system).gitHooks.run {

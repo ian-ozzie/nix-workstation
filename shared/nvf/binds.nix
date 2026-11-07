@@ -9,7 +9,7 @@ in
 {
   options.ozzie.workstation.nvf = {
     binds = lib.mkEnableOption "opinionated nvf binds" // {
-      default = cfg.enable;
+      default = config.ozzie.binds or true;
     };
   };
 
@@ -20,12 +20,6 @@ in
         desc = "Clear highlight from search";
         key = "<Esc>";
         mode = [ "n" ];
-      }
-      {
-        action = "<C-\\><C-n>";
-        desc = "Exit terminal mode";
-        key = "<Esc><Esc>";
-        mode = [ "t" ];
       }
       {
         action = "<C-w><C-h>";
@@ -79,13 +73,25 @@ in
         action = ">gv";
         desc = "Increase indent and keep selection";
         key = ">";
-        mode = [ "v" ];
+        mode = [ "x" ];
       }
       {
         action = "<gv";
         desc = "Increase indent and keep selection";
         key = "<";
-        mode = [ "v" ];
+        mode = [ "x" ];
+      }
+      {
+        action = "nzzzv";
+        desc = "Next search result, centre and open folds";
+        key = "n";
+        mode = [ "n" ];
+      }
+      {
+        action = "Nzzzv";
+        desc = "Previous search result, centre and open folds";
+        key = "N";
+        mode = [ "n" ];
       }
     ];
   };
