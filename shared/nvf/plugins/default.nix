@@ -1,7 +1,7 @@
 {
   imports = [
     ./git.nix
-    # ./terminal.nix
+    ./terminal.nix
     # ./ui.nix
     # ./utility.nix
     # ./visuals.nix
