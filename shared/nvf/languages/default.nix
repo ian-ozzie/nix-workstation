@@ -24,7 +24,7 @@ in
     ./nix.nix
     ./php.nix
     ./rust.nix
-    # ./ts.nix
+    ./typescript.nix
   ];
 
   config = lib.mkIf cfg.enable {
