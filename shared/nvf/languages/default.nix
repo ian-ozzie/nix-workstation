@@ -30,7 +30,6 @@ in
 
   config = lib.mkIf cfg.enable {
     programs.nvf.settings.vim = {
-      binds.whichKey.register."<leader>lt" = "Tests";
       formatter.conform-nvim.enable = true;
 
       autocomplete.blink-cmp = {
@@ -41,6 +40,10 @@ in
           completion.list.selection.preselect = false;
           signature.enabled = true;
         };
+      };
+
+      binds.whichKey.register = lib.mkIf config.ozzie.workstation.nvf.binds {
+        "<leader>lt" = "Tests";
       };
 
       extraPlugins.neotest = {
@@ -54,7 +57,7 @@ in
         '';
       };
 
-      keymaps = [
+      keymaps = lib.mkIf config.ozzie.workstation.nvf.binds [
         {
           action = "<cmd>lua require('conform').format({ async = true })<CR>";
           desc = "Format file";

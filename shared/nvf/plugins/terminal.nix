@@ -20,7 +20,7 @@ in
       telescope.enable = true;
 
       binds = {
-        whichKey.register = {
+        whichKey.register = lib.mkIf config.ozzie.workstation.nvf.binds {
           "<leader>t" = "Terminal";
         };
       };
@@ -33,11 +33,11 @@ in
       terminal = {
         toggleterm = {
           enable = true;
-          mappings.open = "<leader>tt";
+          mappings.open = lib.mkIf config.ozzie.workstation.nvf.binds "<leader>tt";
 
           lazygit = {
             enable = true;
-            mappings.open = "<leader>tg";
+            mappings.open = lib.mkIf config.ozzie.workstation.nvf.binds "<leader>tg";
           };
 
           setupOpts.on_open = lib.mkIf config.ozzie.workstation.nvf.binds (
@@ -71,7 +71,7 @@ in
           enable = true;
           setupOpts.open_for_directories = true;
 
-          mappings = {
+          mappings = lib.mkIf config.ozzie.workstation.nvf.binds {
             openYazi = "<leader>ty";
             openYaziDir = "<leader>tw";
             yaziToggle = "<leader>tr";

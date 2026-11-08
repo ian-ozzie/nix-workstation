@@ -15,7 +15,7 @@ in
 
   config = lib.mkIf cfg.enable {
     programs.nvf.settings.vim = {
-      keymaps = [
+      keymaps = lib.mkIf config.ozzie.workstation.nvf.binds [
         {
           key = "<leader>tn";
           mode = [ "n" ];

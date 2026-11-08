@@ -16,7 +16,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.nvf.settings.vim = {
       binds = {
-        whichKey.register = {
+        whichKey.register = lib.mkIf config.ozzie.workstation.nvf.binds {
           "<leader>c" = "Git-Conflict";
           "<leader>g" = "Git";
           "<leader>gt" = "Toggle";
@@ -34,7 +34,7 @@ in
         git-conflict = {
           enable = true;
 
-          mappings = {
+          mappings = lib.mkIf config.ozzie.workstation.nvf.binds {
             both = "<leader>cb";
             nextConflict = "]x";
             none = "<leader>c0";
@@ -49,7 +49,7 @@ in
           enable = true;
           setupOpts.current_line_blame = true;
 
-          mappings = {
+          mappings = lib.mkIf config.ozzie.workstation.nvf.binds {
             blameLine = "<leader>gb";
             diffProject = "<leader>gD";
             diffThis = "<leader>gd";
@@ -67,7 +67,7 @@ in
         };
       };
 
-      maps = {
+      maps = lib.mkIf config.ozzie.workstation.nvf.binds {
         normal = {
           "[h" = {
             action = "<cmd>Gitsigns nav_hunk prev<CR>";

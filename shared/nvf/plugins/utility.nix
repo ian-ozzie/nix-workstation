@@ -112,7 +112,7 @@ in
           leap = {
             enable = true;
 
-            mappings = {
+            mappings = lib.mkIf config.ozzie.workstation.nvf.binds {
               leapBackwardTo = "S";
               leapForwardTo = "s";
             };
@@ -132,7 +132,7 @@ in
         smart-splits = {
           enable = true;
 
-          keymaps = {
+          keymaps = lib.mkIf config.ozzie.workstation.nvf.binds {
             move_cursor_down = null;
             move_cursor_left = null;
             move_cursor_previous = "<C-`>";
