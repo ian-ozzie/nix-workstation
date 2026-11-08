@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -15,13 +16,16 @@ in
 
   imports = [
     ./nix.nix
-    # ./php.nix
+    ./php.nix
     # ./rust.nix
     # ./ts.nix
   ];
 
   config = lib.mkIf cfg.enable {
     programs.nvf.settings.vim = {
+      binds.whichKey.register."<leader>lt" = "Tests";
+      formatter.conform-nvim.enable = true;
+
       autocomplete.blink-cmp = {
         enable = true;
 
@@ -31,6 +35,56 @@ in
           signature.enabled = true;
         };
       };
+
+      extraPlugins.neotest = {
+        package = pkgs.vimPlugins.neotest;
+        setup = lib.mkDefault ''require("neotest").setup({})'';
+      };
+
+      keymaps = [
+        {
+          action = "<cmd>lua require('conform').format({ async = true })<CR>";
+          desc = "Format file";
+          key = "<leader>lf";
+          mode = [ "n" ];
+        }
+        {
+          action = "<cmd>lua require('neotest').run.run({ suite = true })<CR>";
+          desc = "Run all tests";
+          key = "<leader>lta";
+          mode = "n";
+        }
+        {
+          action = "<cmd>lua require('neotest').run.run()<CR>";
+          desc = "Run nearest test";
+          key = "<leader>ltn";
+          mode = "n";
+        }
+        {
+          action = "<cmd>lua require('neotest').run.run(vim.fn.expand('%:p'))<CR>";
+          desc = "Run test file";
+          key = "<leader>ltf";
+          mode = "n";
+        }
+        {
+          action = "<cmd>lua require('neotest').run.run_last()<CR>";
+          desc = "Rerun last test";
+          key = "<leader>ltl";
+          mode = "n";
+        }
+        {
+          action = "<cmd>lua require('neotest').summary.toggle()<CR>";
+          desc = "Toggle test summary";
+          key = "<leader>lts";
+          mode = "n";
+        }
+        {
+          action = "<cmd>lua require('neotest').output.open({ enter = true })<CR>";
+          desc = "Open test output";
+          key = "<leader>lto";
+          mode = "n";
+        }
+      ];
 
       languages = {
         enableExtraDiagnostics = true;
@@ -66,6 +120,11 @@ in
         lspsaga.enable = false;
         nvim-docs-view.enable = false;
         otter-nvim.enable = false;
+
+        mappings = {
+          format = null;
+          toggleFormatOnSave = null;
+        };
 
         trouble = {
           enable = true;
