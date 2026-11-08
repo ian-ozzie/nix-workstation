@@ -4,6 +4,6 @@
     ./terminal.nix
     ./ui.nix
     ./utility.nix
-    # ./visuals.nix
+    ./visuals.nix
   ];
 }
