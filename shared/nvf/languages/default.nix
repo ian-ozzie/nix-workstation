@@ -12,12 +12,18 @@ in
     enable = lib.mkEnableOption "opinionated languages config" // {
       default = true;
     };
+
+    neotestAdapters = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      internal = true;
+    };
   };
 
   imports = [
     ./nix.nix
     ./php.nix
-    # ./rust.nix
+    ./rust.nix
     # ./ts.nix
   ];
 
@@ -38,7 +44,13 @@ in
 
       extraPlugins.neotest = {
         package = pkgs.vimPlugins.neotest;
-        setup = lib.mkDefault ''require("neotest").setup({})'';
+        setup = ''
+          require("neotest").setup({
+            adapters = {
+              ${lib.concatStringsSep ",\n" cfg.neotestAdapters}
+            },
+          })
+        '';
       };
 
       keymaps = [

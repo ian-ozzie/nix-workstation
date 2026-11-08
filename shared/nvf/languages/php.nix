@@ -15,6 +15,16 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    ozzie.workstation.nvf.languages.neotestAdapters = [
+      ''
+        require("neotest-pest")({
+          root_files = { "composer.json", "tests/Pest.php" },
+          pest_cmd = "vendor/bin/pest",
+          sail_enabled = function() return false end,
+        })
+      ''
+    ];
+
     programs.nvf.settings.vim = {
       languages = {
         php.enable = true;
@@ -30,18 +40,6 @@ in
           rev = "3388a5f00001303020ce885e18007ccd1835212c";
         };
       };
-
-      extraPlugins.neotest.setup = ''
-        require("neotest").setup({
-          adapters = {
-            require("neotest-pest")({
-              root_files = { "composer.json", "tests/Pest.php" },
-              pest_cmd = "vendor/bin/pest",
-              sail_enabled = function() return false end,
-            }),
-          },
-        })
-      '';
 
       lsp.servers.phpactor.init_options = {
         "language_server_configuration.auto_config" = false;
