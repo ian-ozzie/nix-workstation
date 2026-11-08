@@ -21,6 +21,7 @@ in
   };
 
   imports = [
+    ./css.nix
     ./nix.nix
     ./php.nix
     ./rust.nix
